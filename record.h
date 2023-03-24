@@ -2,6 +2,7 @@
 #define _RECORD
 
 #include "maincontrol.h"
+#include "fail.h"
 
 /*按日期显示小区信息*/
 void displayCommunitRecordByDate();
@@ -29,7 +30,7 @@ void modifyRecord();
 void findRecord();
 
 /*通过户号查找住户选项*/
-int findRecordByID(Record * p, int id);
+int findRecordByID(Record* p, int id);
 
 
 

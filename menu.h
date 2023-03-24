@@ -3,6 +3,8 @@
 
 #include "maincontrol.h"
 
+
+
 /*Ö÷²Ëµ¥*/
 void menuMain();
 

@@ -3,8 +3,10 @@
 #include <string.h>
 #include "record.h"
 #include "maincontrol.h"
-#include "fail.h"
 #include"menu.h"
+
+extern int count;
+
 int findRecordByID(Record* rec, int id);
 /*按日期显示小区信息*/;
 void displayCommunitRecordByDate()
@@ -27,10 +29,10 @@ void displayRecord(int n)
 	printf("%s", rec[n].date);
 	printf("%d", rec[n].number);
 	printf("%d", rec[n].join);
-	printf("%f", rec[n].felectricity);
-	printf("%f", rec[n].gelectricity);
-	printf("%f", rec[n].electricity);
-	printf("%f", rec[n].power_rate);
+	printf("%lf", rec[n].felectricity);
+	printf("%lf", rec[n].gelectricity);
+	printf("%lf", rec[n].electricity);
+	printf("%lf", rec[n].power_rate);
 	printf("\n");
 }
 
@@ -39,23 +41,23 @@ void editRecord()
 {
 	printf("$ 录入住户信息 $\n");
 	printf(" 户号：");
-	scanf_s("%d", rec[1].id);
+	scanf_s("%d", &rec[count].id);
 	printf(" 户名：");
-	scanf_s("%s", rec[1].name, 50);
+	scanf_s("%s", rec[count].name, 50);
 	printf(" 小区：");
-	scanf_s("%s", rec[1].community, 50);
+	scanf_s("%s", rec[count].community, 50);
 	printf(" 日期：");
-	scanf_s("%s", rec[1].date, 50);
+	scanf_s("%s", rec[count].date, 50);
 	printf(" 人数：");
-	scanf_s("%d", &rec[1].number);
+	scanf_s("%d", &rec[count].number);
 	printf(" 是否参加峰谷计费：");
-	scanf_s("%d", &rec[1].join);
+	scanf_s("%d", &rec[count].join);
 	printf(" 峰时电量：");
-	scanf_s("%lf", &rec[1].felectricity);
+	scanf_s("%lf", &rec[count].felectricity);
 	printf(" 谷时电量：");
-	scanf_s("%lf", &rec[1].gelectricity);
-	rec[1].electricity = rec[1].felectricity + rec[1].gelectricity;
-	rec[1].power_rate = rate(rec[1].felectricity, rec[1].gelectricity, rec[1].electricity, rec[1].number, rec[1].join);
+	scanf_s("%lf", &rec[count].gelectricity);
+	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
+	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
 /*添加住户选项*/
@@ -90,10 +92,12 @@ void findRecord()
 	if (findRecordByID(rec, id))
 	{
 		printf("$ 找到以下住户信息 $\n");
+		displayRecord(id);
 	}
 	else
 	{
 		printf("住户信息中未找到该住户\n");
+		displayRecord(id);
 	}
 }
 
@@ -102,7 +106,7 @@ int findRecordByID(Record* rec, int id)
 {
 	int i = 0;
 	int n = readRecordFile(rec);
-	while (i <= n)
+	while (i < n)
 	{
 		if (rec[i].id == id)
 		{

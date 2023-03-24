@@ -3,6 +3,8 @@
 #include "fail.h"
 #include "maincontrol.h"
 
+extern int count;
+
 /*从文件中加载住户信息*/
 int readRecordFile(Record* rec)
 {
@@ -27,19 +29,31 @@ int readRecordFile(Record* rec)
 }
 
 /*在文件中保存住户信息*/
-void saveFile(Record* rec, int n)
+void saveFile(Record* rec, int count)
 {
 	FILE* fp;
 	fopen_s(&fp, "record.txt", "w");
 	if (fp)                                    /*以写方式打开指定文件*/
 	{
-		fwrite(rec, sizerec, n, fp);           /*一次性向文件写入n条记录*/
+		for (int i = 0; i < count; ++i)
+		{
+			fprintf(fp, "%d", rec[i].id);
+			fprintf(fp, "%s", rec[i].name);
+			fprintf(fp, "%s", rec[i].community);
+			fprintf(fp, "%s", rec[i].date);
+			fprintf(fp, "%d", rec[i].number);
+			fprintf(fp, "%d", rec[i].join);
+			fprintf(fp, "%lf", rec[i].felectricity);
+			fprintf(fp, "%lf", rec[i].gelectricity);
+			fprintf(fp, "%lf", rec[i].electricity);
+			fprintf(fp, "%lf", rec[i].power_rate);
+		}
 		fclose(fp);                            /*然后退出*/
 	}
 	else
 	{
 		printf("读文件失败！\n");              /*若打开失败，输出提示信息*/
 		exit(0);
-		fclose(fp);
-	}                                          /*关闭文件*/
+		fclose(fp);                            /*关闭文件*/
+	}
 }

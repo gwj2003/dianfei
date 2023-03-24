@@ -3,7 +3,6 @@
 #include"maincontrol.h"
 #include"menu.h"
 #include"record.h"
-#include "fail.h"
 
 
 
@@ -51,8 +50,8 @@ void runstaff(int choice)
 
 int main()
 {
-	int n = readRecordFile(rec);
+	int count = readRecordFile(rec);
 	menuMain();
-	saveFile(rec, n);
+	saveFile(rec, count);
 	return 0;
 }

@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include "menu.h"
 #include "maincontrol.h"
-#include "fail.h"
 #include "record.h"
+
+int count = 0;
 
 /*Ö÷²Ëµ¥*/
 void menuMain()
