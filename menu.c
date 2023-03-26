@@ -42,10 +42,15 @@ void statistician()
 		printf("请选择：");
 		scanf_s("%d", &choice);
 		if (choice >= 0 && choice <= 4)
+		{
 			runstatistician(choice);
+		}
 		else
+		{
 			printf("\n");
-		printf("请重新输入\n\n");
+			printf("请重新输入\n\n");
+		}
+		
 
 	} while (choice);
 }

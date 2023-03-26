@@ -23,17 +23,16 @@ void displayCommunitRecordByID()
 /*显示住户信息*/
 void displayRecord(int n)
 {
-	printf("%d", rec[n].id);
-	printf("%s", rec[n].name);
-	printf("%s", rec[n].community);
-	printf("%s", rec[n].date);
-	printf("%d", rec[n].number);
-	printf("%d", rec[n].join);
-	printf("%lf", rec[n].felectricity);
-	printf("%lf", rec[n].gelectricity);
-	printf("%lf", rec[n].electricity);
-	printf("%lf", rec[n].power_rate);
-	printf("\n");
+	printf("%d\n", rec[n].id);
+	printf("%s\n", rec[n].name);
+	printf("%s\n", rec[n].community);
+	printf("%s\n", rec[n].date);
+	printf("%d\n", rec[n].number);
+	printf("%d\n", rec[n].join);
+	printf("%lf\n", rec[n].felectricity);
+	printf("%lf\n", rec[n].gelectricity);
+	printf("%lf\n", rec[n].electricity);
+	printf("%lf\n", rec[n].power_rate);
 }
 
 /*编辑住户信息*/
@@ -66,7 +65,6 @@ void addRecord()
 	printf("$ 添加住户信息 $\n");
 	printf(" 输入户号：");
 	editRecord(rec);
-	saveFile(rec, 1);
 	printf("\n成功添加住户！\n");
 }
 
@@ -104,9 +102,9 @@ void findRecord()
 /*通过户号查找住户选项*/
 int findRecordByID(Record* rec, int id)
 {
-	int i = 0;
+	int i = 1;
 	int n = readRecordFile(rec);
-	while (i < n)
+	while (i<= n)
 	{
 		if (rec[i].id == id)
 		{

@@ -2,7 +2,7 @@
 #define _RECORD
 
 #include "maincontrol.h"
-#include "fail.h"
+#include "file.h"
 
 /*按日期显示小区信息*/
 void displayCommunitRecordByDate();
