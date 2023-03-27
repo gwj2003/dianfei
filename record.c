@@ -38,25 +38,53 @@ void displayRecord(int n)
 /*编辑住户信息*/
 void editRecord()
 {
+	int id;
 	printf("$ 录入住户信息 $\n");
 	printf(" 户号：");
 	scanf_s("%d", &rec[count].id);
-	printf(" 户名：");
-	scanf_s("%s", rec[count].name, 50);
-	printf(" 小区：");
-	scanf_s("%s", rec[count].community, 50);
-	printf(" 日期：");
-	scanf_s("%d", &rec[count].date);
-	printf(" 人数：");
-	scanf_s("%d", &rec[count].number);
-	printf(" 是否参加峰谷计费：");
-	scanf_s("%d", &rec[count].join);
-	printf(" 峰时电量：");
-	scanf_s("%lf", &rec[count].felectricity);
-	printf(" 谷时电量：");
-	scanf_s("%lf", &rec[count].gelectricity);
-	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
-	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
+	id = rec[count].id;
+	rec[count].id = 0;
+	change = findRecordByID(rec, id);
+	if (change)
+	{
+		rec[change].id = id;
+		printf(" 已有该用户信息：\n");
+		printf(" 户名：");
+		printf("%s\n", rec[change].name);
+		printf(" 小区：");
+		printf("%s\n", rec[change].community);
+		printf(" 人数：");
+		printf("%d\n", rec[change].number);
+		printf(" 是否参加峰谷计费：");
+		printf("%d\n", rec[change].join);
+		printf(" 日期：");
+		scanf_s("%d", &rec[change].date);
+		printf(" 峰时电量：");
+		scanf_s("%lf", &rec[change].felectricity);
+		printf(" 谷时电量：");
+		scanf_s("%lf", &rec[change].gelectricity);
+		change = 0;
+	}
+	else
+	{
+		rec[count].id = id;
+		printf(" 户名：");
+		scanf_s("%s", rec[count].name, 50);
+		printf(" 小区：");
+		scanf_s("%s", rec[count].community, 50);
+		printf(" 日期：");
+		scanf_s("%d", &rec[count].date);
+		printf(" 人数：");
+		scanf_s("%d", &rec[count].number);
+		printf(" 是否参加峰谷计费：");
+		scanf_s("%d", &rec[count].join);
+		printf(" 峰时电量：");
+		scanf_s("%lf", &rec[count].felectricity);
+		printf(" 谷时电量：");
+		scanf_s("%lf", &rec[count].gelectricity);
+		rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
+		rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
+	}
 }
 
 /*添加住户选项*/
@@ -72,7 +100,7 @@ void addRecord()
 void removeRecord()
 {
 	int id = 0;
-	int date=0;
+	int date = 0;
 	printf("$ 输入户号和日期查找要删除的电费记录信息 $\n");
 	printf(" 输入户号：");
 	scanf_s("%d", &id);
@@ -104,7 +132,7 @@ void modifyRecord()
 	scanf_s("%d", &id);
 	printf(" 输入日期：");
 	scanf_s("%d", &date);
-    change = findRecordByIDdate(rec, id, date);
+	change = findRecordByIDdate(rec, id, date);
 	if (change)
 	{
 		printf("$ 找到以下住户信息 $\n");
@@ -123,6 +151,8 @@ void changeif()
 {
 	printf(" 是否参加峰谷计费：");
 	scanf_s("%d", &rec[change].join);
+	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
+	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
 /*更改峰时电量*/
@@ -130,6 +160,8 @@ void changef()
 {
 	printf(" 峰时电量：");
 	scanf_s("%lf", &rec[change].felectricity);
+	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
+	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
 /*更改谷时电量*/
@@ -137,6 +169,8 @@ void changeg()
 {
 	printf(" 谷时电量：");
 	scanf_s("%lf", &rec[change].gelectricity);
+	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
+	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
 /*查找住户选项*/
@@ -180,7 +214,7 @@ int findRecordByIDdate(Record* rec, int id, int date)
 	int i = 0;
 	while (i <= count)
 	{
-		if ((rec[i].id == id) && (rec[i].date == date) )
+		if ((rec[i].id == id) && (rec[i].date == date))
 		{
 			return i;
 		}

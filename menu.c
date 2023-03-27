@@ -96,7 +96,9 @@ void ask()
 		printf("ÇëÑ¡Ôñ£º");
 		scanf_s("%d", &choice);
 		if (choice >= 0 && choice <= 3)
+		{
 			runchange(choice);
+		}
 		else
 		{
 			printf("\n");
