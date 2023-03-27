@@ -11,7 +11,7 @@ typedef struct Record
 	char community[STR_LEN];        /*小区*/
 	int date;                       /*日期*/
 	int number;                     /*人数*/
-	int join;                       /*是否参加峰谷计费*/
+	int join;                       /*是否参加峰谷计费,1为参加2为不参加*/
 	double felectricity;            /*峰时电量*/
 	double gelectricity;            /*谷时电量*/
 	double electricity;             /*总电量*/
@@ -23,7 +23,7 @@ Record rec[STR_LEN];
 /*从文件中加载住户信息*/
 int readRecordFile(Record* rec);
 
-#define sizerec sizeof(Record)
+#define sizerec sizeof(Record)     /*计算结构体长度*/
 
 /*在文件中保存住户信息*/
 void saveFile(Record* rec, int n);

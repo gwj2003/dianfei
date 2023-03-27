@@ -3,8 +3,8 @@
 #include "maincontrol.h"
 #include "record.h"
 
-int count = 0;
-int change = 0;
+int count = 0;                 /*用于计算记录条数*/
+int change = 0;                /*用于在更改记录时确定地址*/
 
 /*主菜单*/
 void menuMain()
@@ -27,7 +27,7 @@ void menuMain()
 			printf("请重新输入\n\n");
 		}
 	} while (choice);
-	saveFile(rec, count);
+	saveFile(rec, count);        /*在文件中保存住户信息*/
 }
 
 /*电费数据记录人员*/
@@ -122,7 +122,7 @@ void expansion()
 		printf("请选择：");
 		scanf_s("%d", &choice);
 		if (choice >= 0 && choice <= 4)
-			runstatistician(choice);
+			runexpansion(choice);
 		else
 		{
 			printf("\n");

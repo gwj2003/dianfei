@@ -36,19 +36,17 @@ void displayRecord(int n)
 }
 
 /*编辑住户信息*/
-void editRecord()
+void editRecord()//没有复制已有id到新记录里
 {
 	int id;
 	printf("$ 录入住户信息 $\n");
 	printf(" 户号：");
-	scanf_s("%d", &rec[count].id);
-	id = rec[count].id;
-	rec[count].id = 0;
-	change = findRecordByID(rec, id);
-	if (change)
+	scanf_s("%d", &rec[count].id);                 /*先输入下一行的户号*/
+	id = rec[count].id;                            /*赋值给id*/
+	change = findRecordByID(rec, id);              /*寻找是否已有相同的户号*/
+	if (change)//此处输入的信息会空缺，有可能读文件时读不到
 	{
-		rec[change].id = id;
-		printf(" 已有该用户信息：\n");
+		printf(" 已有该用户信息：\n");             /*输出相同的信息*/
 		printf(" 户名：");
 		printf("%s\n", rec[change].name);
 		printf(" 小区：");
@@ -57,17 +55,16 @@ void editRecord()
 		printf("%d\n", rec[change].number);
 		printf(" 是否参加峰谷计费：");
 		printf("%d\n", rec[change].join);
-		printf(" 日期：");
-		scanf_s("%d", &rec[change].date);
+		printf(" 日期：");                         /*输入不同的信息*/
+		scanf_s("%d", &rec[count].date);
 		printf(" 峰时电量：");
-		scanf_s("%lf", &rec[change].felectricity);
+		scanf_s("%lf", &rec[count].felectricity);
 		printf(" 谷时电量：");
-		scanf_s("%lf", &rec[change].gelectricity);
-		change = 0;
+		scanf_s("%lf", &rec[count].gelectricity);
+		change = 0;                               /*把change改为0*/
 	}
 	else
 	{
-		rec[count].id = id;
 		printf(" 户名：");
 		scanf_s("%s", rec[count].name, 50);
 		printf(" 小区：");
@@ -81,7 +78,7 @@ void editRecord()
 		printf(" 峰时电量：");
 		scanf_s("%lf", &rec[count].felectricity);
 		printf(" 谷时电量：");
-		scanf_s("%lf", &rec[count].gelectricity);
+		scanf_s("%lf", &rec[count].gelectricity);/*计算总电量、电费*/
 		rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 		rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 	}
@@ -111,9 +108,9 @@ void removeRecord()
 	{
 		while (n < count)
 		{
-			rec[n] = rec[++n];
+			rec[n] = rec[++n];            /*用后一个数组覆盖前一个数组*/
 		}
-		count--;
+		count--;                          /*记录少了一行*/
 		printf("已删除该条信息\n");
 	}
 	else
@@ -214,7 +211,7 @@ int findRecordByIDdate(Record* rec, int id, int date)
 	int i = 0;
 	while (i <= count)
 	{
-		if ((rec[i].id == id) && (rec[i].date == date))
+		if ((rec[i].id == id) && (rec[i].date == date))   /*两个条件同时满足*/
 		{
 			return i;
 		}
@@ -225,26 +222,25 @@ int findRecordByIDdate(Record* rec, int id, int date)
 
 
 
-
-/*小区已扩容名单*/
+/*已扩容小区名单*/
 void UnList()
 {
 
 }
 
-/*小区未扩容名单*/
+/*未扩容小区名单*/
 void List()
 {
 
 }
 
-/*小区急需扩容名单*/
+/*急需扩容小区名单*/
 void need()
 {
 
 }
 
-/*小区不急需扩容名单*/
+/*不急需扩容小区名单*/
 void unneeded()
 {
 

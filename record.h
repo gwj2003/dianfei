@@ -10,9 +10,11 @@ void displayCommunitRecordByDate();
 /*按户号显示小区信息*/
 void displayCommunitRecordByID();
 
+/*复制不同的信息*/
+void copyuser();
+
 /*显示住户信息*/
 void displayRecord(int n);
-
 
 /*编辑住户信息*/
 void editRecord();
@@ -25,6 +27,15 @@ void removeRecord();
 
 /*修改住户选项*/
 void modifyRecord();
+
+/*更改是否参加峰谷计费*/
+void changeif();
+
+/*更改峰时电量*/
+void changef();
+
+/*更改谷时电量*/
+void changeg();
 
 /*查找住户选项*/
 void findRecord();
@@ -39,16 +50,16 @@ int findRecordByIDdate(Record* p, int id,int date);
 
 
 
-/*小区已扩容名单*/
+/*已扩容小区名单*/
 void UnList();
 
-/*小区未扩容优先名单*/
+/*未扩容小区名单*/
 void List();
 
-/*小区急需扩容名单*/
+/*急需扩容小区名单*/
 void need();
 
-/*小区不急需扩容名单*/
+/*不急需扩容小区名单*/
 void unneeded();
 
 

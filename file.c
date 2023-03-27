@@ -6,7 +6,7 @@
 extern int count;
 
 /*从文件中加载住户信息*/
-int readRecordFile(Record* rec)
+int readRecordFile(Record* rec)//需要修改，将文件的内容读入内存
 {
 	FILE* fp;
 	int i = 0;
@@ -35,7 +35,7 @@ void saveFile(Record* rec, int count)
 	fopen_s(&fp, "record.txt", "w");
 	if (fp)                                    /*以写方式打开指定文件*/
 	{
-		for (int i = 1; i <= count; ++i)
+		for (int i = 1; i <= count; ++i)       /*所有数据以此写入*/
 		{
 			fprintf(fp, "%d", rec[i].id);
 			fprintf(fp, "%s", rec[i].name);
@@ -53,7 +53,7 @@ void saveFile(Record* rec, int count)
 	else
 	{
 		printf("读文件失败！\n");              /*若打开失败，输出提示信息*/
-		exit(0);
+		exit(0);                               /*实际上不可能*/
 		fclose(fp);                            /*关闭文件*/
 	}
 }
