@@ -52,6 +52,5 @@ int main()
 {
 	int count = readRecordFile(rec);
 	menuMain();
-	saveFile(rec, count);
 	return 0;
 }

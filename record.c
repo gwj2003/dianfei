@@ -63,7 +63,7 @@ void editRecord()
 void addRecord()
 {
 	printf("$ 添加住户信息 $\n");
-	printf(" 输入户号：");
+	count++;
 	editRecord(rec);
 	printf("\n成功添加住户！\n");
 }
@@ -87,30 +87,29 @@ void findRecord()
 	printf("$ 按户号查找电费记录信息 $\n");
 	printf(" 输入户号：");
 	scanf_s("%d", &id);
-	if (findRecordByID(rec, id))
+	int n = findRecordByID(rec, id);
+	if (n)
 	{
 		printf("$ 找到以下住户信息 $\n");
-		displayRecord(id);
+		displayRecord(n);
 	}
 	else
 	{
 		printf("住户信息中未找到该住户\n");
-		displayRecord(id);
 	}
 }
 
 /*通过户号查找住户选项*/
 int findRecordByID(Record* rec, int id)
 {
-	int i = 1;
-	int n = readRecordFile(rec);
-	while (i<= n)
+	int i = 0;
+	while (i<= count)
 	{
 		if (rec[i].id == id)
 		{
-			i++;
+			return i;
 		}
-		return i;
+		i++;
 	}
 	return 0;
 }

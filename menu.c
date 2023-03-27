@@ -24,6 +24,7 @@ void menuMain()
 			printf("\n");
 		printf("请重新输入\n\n");
 	} while (choice);
+	saveFile(rec, count);
 }
 
 /*电费数据记录人员*/
