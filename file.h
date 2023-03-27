@@ -9,7 +9,7 @@ typedef struct Record
 	int id;                         /*户号*/
 	char name[STR_LEN];             /*户名*/
 	char community[STR_LEN];        /*小区*/
-	char date[STR_LEN];             /*日期*/
+	int date;                       /*日期*/
 	int number;                     /*人数*/
 	int join;                       /*是否参加峰谷计费*/
 	double felectricity;            /*峰时电量*/

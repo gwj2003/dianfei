@@ -35,12 +35,12 @@ void saveFile(Record* rec, int count)
 	fopen_s(&fp, "record.txt", "w");
 	if (fp)                                    /*以写方式打开指定文件*/
 	{
-		for (int i = 0; i <= count; ++i)
+		for (int i = 1; i <= count; ++i)
 		{
 			fprintf(fp, "%d", rec[i].id);
 			fprintf(fp, "%s", rec[i].name);
 			fprintf(fp, "%s", rec[i].community);
-			fprintf(fp, "%s", rec[i].date);
+			fprintf(fp, "%d", rec[i].date);
 			fprintf(fp, "%d", rec[i].number);
 			fprintf(fp, "%d", rec[i].join);
 			fprintf(fp, "%lf", rec[i].felectricity);

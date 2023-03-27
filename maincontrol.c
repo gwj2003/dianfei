@@ -48,6 +48,19 @@ void runstaff(int choice)
 	}
 }
 
+/*选择修改功能*/
+void  runchange(int choice)
+{
+	switch (choice)
+	{
+	case 1:changeif();
+		break;
+	case 2:changef();
+		break;
+	case 3:changeg();
+		break;
+	}
+}
 int main()
 {
 	int count = readRecordFile(rec);

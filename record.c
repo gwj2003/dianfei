@@ -6,8 +6,8 @@
 #include"menu.h"
 
 extern int count;
+extern int change;
 
-int findRecordByID(Record* rec, int id);
 /*按日期显示小区信息*/;
 void displayCommunitRecordByDate()
 {
@@ -26,7 +26,7 @@ void displayRecord(int n)
 	printf("%d\n", rec[n].id);
 	printf("%s\n", rec[n].name);
 	printf("%s\n", rec[n].community);
-	printf("%s\n", rec[n].date);
+	printf("%d\n", rec[n].date);
 	printf("%d\n", rec[n].number);
 	printf("%d\n", rec[n].join);
 	printf("%lf\n", rec[n].felectricity);
@@ -46,7 +46,7 @@ void editRecord()
 	printf(" 小区：");
 	scanf_s("%s", rec[count].community, 50);
 	printf(" 日期：");
-	scanf_s("%s", rec[count].date, 50);
+	scanf_s("%d", &rec[count].date);
 	printf(" 人数：");
 	scanf_s("%d", &rec[count].number);
 	printf(" 是否参加峰谷计费：");
@@ -71,13 +71,72 @@ void addRecord()
 /*删除住户选项*/
 void removeRecord()
 {
-
+	int id = 0;
+	int date=0;
+	printf("$ 输入户号和日期查找要删除的电费记录信息 $\n");
+	printf(" 输入户号：");
+	scanf_s("%d", &id);
+	printf(" 输入日期：");
+	scanf_s("%d", &date);
+	int n = findRecordByIDdate(rec, id, date);
+	if (n)
+	{
+		while (n < count)
+		{
+			rec[n] = rec[++n];
+		}
+		count--;
+		printf("已删除该条信息\n");
+	}
+	else
+	{
+		printf("住户信息中未找到该住户\n");
+	}
 }
 
 /*修改住户选项*/
 void modifyRecord()
 {
+	int id = 0;
+	int date = 0;
+	printf("$ 输入户号和日期查找要修改的电费记录信息 $\n");
+	printf(" 输入户号：");
+	scanf_s("%d", &id);
+	printf(" 输入日期：");
+	scanf_s("%d", &date);
+    change = findRecordByIDdate(rec, id, date);
+	if (change)
+	{
+		printf("$ 找到以下住户信息 $\n");
+		displayRecord(change);
+		ask();
+		change = 0;
+	}
+	else
+	{
+		printf("住户信息中未找到该住户\n");
+	}
+}
 
+/*更改是否参加峰谷计费*/
+void changeif()
+{
+	printf(" 是否参加峰谷计费：");
+	scanf_s("%d", &rec[change].join);
+}
+
+/*更改峰时电量*/
+void changef()
+{
+	printf(" 峰时电量：");
+	scanf_s("%lf", &rec[change].felectricity);
+}
+
+/*更改谷时电量*/
+void changeg()
+{
+	printf(" 谷时电量：");
+	scanf_s("%lf", &rec[change].gelectricity);
 }
 
 /*查找住户选项*/
@@ -103,7 +162,7 @@ void findRecord()
 int findRecordByID(Record* rec, int id)
 {
 	int i = 0;
-	while (i<= count)
+	while (i <= count)
 	{
 		if (rec[i].id == id)
 		{
@@ -115,7 +174,20 @@ int findRecordByID(Record* rec, int id)
 }
 
 
-
+/*通过户号和日期查找住户选项*/
+int findRecordByIDdate(Record* rec, int id, int date)
+{
+	int i = 0;
+	while (i <= count)
+	{
+		if ((rec[i].id == id) && (rec[i].date == date) )
+		{
+			return i;
+		}
+		i++;
+	}
+	return 0;
+}
 
 
 

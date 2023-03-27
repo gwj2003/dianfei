@@ -4,6 +4,7 @@
 #include "record.h"
 
 int count = 0;
+int change = 0;
 
 /*主菜单*/
 void menuMain()
@@ -21,8 +22,10 @@ void menuMain()
 		if (choice >= 0 && choice <= 2)
 			runmenuMain(choice);
 		else
+		{
 			printf("\n");
-		printf("请重新输入\n\n");
+			printf("请重新输入\n\n");
+		}
 	} while (choice);
 	saveFile(rec, count);
 }
@@ -72,8 +75,33 @@ void staff()
 		if (choice >= 0 && choice <= 2)
 			runstaff(choice);
 		else
+		{
 			printf("\n");
-		printf("请重新输入\n\n");
+			printf("请重新输入\n\n");
+		}
+	} while (choice);
+}
+
+/*询问要修改什么*/
+void ask()
+{
+	int choice;
+	do
+	{
+		printf("[1] 修改是否参加峰谷计费\n");
+		printf("[2] 修改峰时电量\n");
+		printf("[3] 修改谷时电量\n");
+		printf("[0] 返回\n");
+		printf("\n");
+		printf("请选择：");
+		scanf_s("%d", &choice);
+		if (choice >= 0 && choice <= 3)
+			runchange(choice);
+		else
+		{
+			printf("\n");
+			printf("请重新输入\n\n");
+		}
 	} while (choice);
 }
 
@@ -94,7 +122,9 @@ void expansion()
 		if (choice >= 0 && choice <= 4)
 			runstatistician(choice);
 		else
+		{
 			printf("\n");
-		printf("请重新输入\n\n");
+			printf("请重新输入\n\n");
+		}
 	} while (choice);
 }

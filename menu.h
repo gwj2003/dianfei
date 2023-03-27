@@ -14,6 +14,9 @@ void statistician();
 /*供电公司工作人员*/
 void staff();
 
+/*询问要修改什么*/
+void ask();
+
 /*扩容管理*/
 void expansion();
 
