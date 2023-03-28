@@ -20,19 +20,48 @@ void displayCommunitRecordByID()
 
 }
 
-/*显示住户信息*/
-void displayRecord(int n)
+/*显示相同住户标题*/
+void displaysameTitle()
 {
-	printf("%d\n", rec[n].id);
-	printf("%s\n", rec[n].name);
-	printf("%s\n", rec[n].community);
-	printf("%d\n", rec[n].date);
-	printf("%d\n", rec[n].number);
-	printf("%d\n", rec[n].join);
-	printf("%lf\n", rec[n].felectricity);
-	printf("%lf\n", rec[n].gelectricity);
-	printf("%lf\n", rec[n].electricity);
-	printf("%lf\n", rec[n].power_rate);
+	printf("%-8s", "户号");
+	printf("%-8s", "户名");
+	printf("%-8s", "小区");
+	printf("%-8s", "人数");
+	printf("%-8s", "是否参与");
+	printf("\n");
+}
+
+/*显示不同住户标题*/
+void displaydifferentTitle()
+{
+	printf("%-8s", "日期");
+	printf("%-16s", "峰时电量");
+	printf("%-16s", "谷时电量");
+	printf("%-16s", "总电量");
+	printf("%-16s", "电费");
+	printf("\n");
+}
+
+/*显示重复住户信息*/
+void displaysame(int n)
+{
+	printf("%-8d", rec[n].id);
+	printf("%-8s", rec[n].name);
+	printf("%-8s", rec[n].community);
+	printf("%-8d", rec[n].number);
+	printf("%-8d", rec[n].join);
+	printf("\n");
+}
+
+/*显示不重复住户信息*/
+void displaydifferent(int n)
+{
+	printf("%-8d", rec[n].date);
+	printf("%-16lf", rec[n].felectricity);
+	printf("%-16lf", rec[n].gelectricity);
+	printf("%-16lf", rec[n].electricity);
+	printf("%-16lf", rec[n].power_rate);
+	printf("\n");
 }
 
 /*编辑住户信息*/
@@ -42,19 +71,15 @@ void editRecord()//没有复制已有id到新记录里
 	printf("$ 录入住户信息 $\n");
 	printf(" 户号：");
 	scanf_s("%d", &rec[count].id);                 /*先输入下一行的户号*/
-	id = rec[count].id;                            /*赋值给id*/
+	id = rec[count].id;                             /*赋值给id*/
+	rec[count].id = 0;
 	change = findRecordByID(rec, id);              /*寻找是否已有相同的户号*/
+	rec[count].id = id;
 	if (change)//此处输入的信息会空缺，有可能读文件时读不到
 	{
 		printf(" 已有该用户信息：\n");             /*输出相同的信息*/
-		printf(" 户名：");
-		printf("%s\n", rec[change].name);
-		printf(" 小区：");
-		printf("%s\n", rec[change].community);
-		printf(" 人数：");
-		printf("%d\n", rec[change].number);
-		printf(" 是否参加峰谷计费：");
-		printf("%d\n", rec[change].join);
+		displaysameTitle();
+		displaysame(change);
 		printf(" 日期：");                         /*输入不同的信息*/
 		scanf_s("%d", &rec[count].date);
 		printf(" 峰时电量：");
@@ -133,7 +158,10 @@ void modifyRecord()
 	if (change)
 	{
 		printf("$ 找到以下住户信息 $\n");
-		displayRecord(change);
+		displaysameTitle();
+		displaysame(change);
+		displaydifferentTitle();
+		displaydifferent(change);
 		ask();
 		change = 0;
 	}
@@ -181,7 +209,10 @@ void findRecord()
 	if (n)
 	{
 		printf("$ 找到以下住户信息 $\n");
-		displayRecord(n);
+		displaysameTitle();
+		displaysame(n);
+		displaydifferentTitle();
+		displaydifferent(n);
 	}
 	else
 	{

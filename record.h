@@ -10,11 +10,17 @@ void displayCommunitRecordByDate();
 /*按户号显示小区信息*/
 void displayCommunitRecordByID();
 
-/*复制不同的信息*/
-void copyuser();
+/*显示相同住户标题*/
+void displaysameTitle();
 
-/*显示住户信息*/
-void displayRecord(int n);
+/*显示不同住户标题*/
+void displaydifferentTitle();
+
+/*显示重复住户信息*/
+void displaysame(int n);
+
+/*显示不重复住户信息*/
+void displaydifferent(int n);
 
 /*编辑住户信息*/
 void editRecord();

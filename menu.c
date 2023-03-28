@@ -36,7 +36,7 @@ void statistician()
 	int choice;
 	do
 	{
-		printf("$ 电费数据记录人员 $\n\n");
+		printf("\n$ 电费数据记录人员 $\n");
 		printf("[1] 查询电费记录信息\n");
 		printf("[2] 添加住户电费记录信息\n");
 		printf("[3] 删除住户电费记录信息\n");
@@ -65,7 +65,7 @@ void staff()
 	int choice;
 	do
 	{
-		printf("$ 供电公司工作人员 $\n\n");
+		printf("\n$ 供电公司工作人员 $\n");
 		printf("[1] 查询电费记录信息\n");
 		printf("[2] 扩容管理\n");
 		printf("[0] 返回\n");
