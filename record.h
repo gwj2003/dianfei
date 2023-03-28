@@ -5,10 +5,13 @@
 #include "file.h"
 
 /*按日期显示小区信息*/
-void displayCommunitRecordByDate();
+void displayCommunitByDate();
 
 /*按户号显示小区信息*/
-void displayCommunitRecordByID();
+void displayCommunitByID();
+
+/*通过小区名查找*/
+int findCommunitByID(Record* rec, char com);
 
 /*显示相同住户标题*/
 void displaysameTitle();

@@ -108,6 +108,54 @@ void ask()
 	} while (choice);
 }
 
+/*选择查询小区电费记录信息功能*/
+void find()
+{
+	int choice;
+	do
+	{
+		printf("[1] 按户号查询\n");
+		printf("[2] 按小区查询\n");
+		printf("[0] 返回\n");
+		printf("\n");
+		printf("请选择：");
+		scanf_s("%d", &choice);
+		if (choice >= 0 && choice <= 2)
+		{
+			runfind(choice);
+		}
+		else
+		{
+			printf("\n");
+			printf("请重新输入\n\n");
+		}
+	} while (choice);
+}
+
+/*选择查询小区电费记录信息功能*/
+void findcommunity()
+{
+	int choice;
+	do
+	{
+		printf("[1] 按日期显示\n");
+		printf("[2] 按户号显示\n");
+		printf("[0] 返回\n");
+		printf("\n");
+		printf("请选择：");
+		scanf_s("%d", &choice);
+		if (choice >= 0 && choice <= 2)
+		{
+			runfindcommunity(choice);
+		}
+		else
+		{
+			printf("\n");
+			printf("请重新输入\n\n");
+		}
+	} while (choice);
+}
+
 /*扩容管理*/
 void expansion()
 {

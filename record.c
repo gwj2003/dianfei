@@ -10,15 +10,44 @@ extern int change;
 extern int add;
 
 /*按日期显示小区信息*/;
-void displayCommunitRecordByDate()
+void displayCommunitByDate()
 {
 
 }
 
 /*按户号显示小区信息*/
-void displayCommunitRecordByID()
+void displayCommunitByID()
 {
+	char com;
+	printf("$ 按户号显示小区电费记录信息 $\n");
+	printf(" 输入小区名：");
+	scanf_s("%s", &com,50);
+	int n = findCommunitByID( rec, com);
+	if(n)
+	{
+		printf(" 小区名：");
+		printf("%-8s", rec[n].community);
+		printf("户号:        户名:        \n");
+	}
+	else
+	{
+		printf("住户信息中未找到该小区\n");
+	}
+}
 
+/*通过小区名查找*/
+int findCommunitByID(Record* rec, char com)
+{
+	int i = 0;
+	while (i <= count)
+	{
+		if ((strcmp(rec[i].community,com)==0))
+		{
+			return i;
+		}
+		i++;
+	}
+	return 0;
 }
 
 /*显示相同住户标题*/
@@ -72,7 +101,7 @@ void editRecord()//没有复制已有id到新记录里
 	printf("$ 录入住户信息 $\n");
 	printf(" 户号：");
 	scanf_s("%d", &rec[count].id);                 /*先输入下一行的户号*/
-	id = rec[count].id;                             /*赋值给id*/
+	id = rec[count].id;                            /*赋值给id*/
 	rec[count].id = 0;
 	change = findRecordByID(rec, id);              /*寻找是否已有相同的户号*/
 	rec[count].id = id;
@@ -216,7 +245,6 @@ void findRecord()
 	}
 	else
 	{
-		printf("住户信息中未找到该住户\n");
 		printf("$ 找到以下住户信息 $\n");
 		displaysameTitle();
 		displaysame(n);

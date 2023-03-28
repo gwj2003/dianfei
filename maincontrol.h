@@ -1,6 +1,12 @@
 #ifndef _MAINCONTROL
 #define _MAINCONTROL
 
+/*选择按小区查询电费记录信息功能*/
+void runfindcommunity(int choice);
+
+/*选择查询电费记录信息功能*/
+void runfind(int choice);
+
 /*选择身份*/
 void runmenuMain(int choice);
 

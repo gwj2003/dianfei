@@ -17,6 +17,12 @@ void staff();
 /*询问要修改什么*/
 void ask();
 
+/*选择查询电费记录信息功能*/
+void find();
+
+/*选择查询小区电费记录信息功能*/
+void findcommunity();
+
 /*扩容管理*/
 void expansion();
 
