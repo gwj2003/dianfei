@@ -8,41 +8,41 @@
 extern int count;
 extern int change;
 
-/*°´ÈÕÆÚÏÔÊ¾Ğ¡ÇøĞÅÏ¢*/;
+/*æŒ‰æ—¥æœŸæ˜¾ç¤ºå°åŒºä¿¡æ¯*/;
 void displayCommunitRecordByDate()
 {
 
 }
 
-/*°´»§ºÅÏÔÊ¾Ğ¡ÇøĞÅÏ¢*/
+/*æŒ‰æˆ·å·æ˜¾ç¤ºå°åŒºä¿¡æ¯*/
 void displayCommunitRecordByID()
 {
 
 }
 
-/*ÏÔÊ¾ÏàÍ¬×¡»§±êÌâ*/
+/*æ˜¾ç¤ºç›¸åŒä½æˆ·æ ‡é¢˜*/
 void displaysameTitle()
 {
-	printf("%-8s", "»§ºÅ");
-	printf("%-8s", "»§Ãû");
-	printf("%-8s", "Ğ¡Çø");
-	printf("%-8s", "ÈËÊı");
-	printf("%-8s", "ÊÇ·ñ²ÎÓë");
+	printf("%-8s", "æˆ·å·");
+	printf("%-8s", "æˆ·å");
+	printf("%-8s", "å°åŒº");
+	printf("%-8s", "äººæ•°");
+	printf("%-8s", "æ˜¯å¦å‚ä¸");
 	printf("\n");
 }
 
-/*ÏÔÊ¾²»Í¬×¡»§±êÌâ*/
+/*æ˜¾ç¤ºä¸åŒä½æˆ·æ ‡é¢˜*/
 void displaydifferentTitle()
 {
-	printf("%-8s", "ÈÕÆÚ");
-	printf("%-16s", "·åÊ±µçÁ¿");
-	printf("%-16s", "¹ÈÊ±µçÁ¿");
-	printf("%-16s", "×ÜµçÁ¿");
-	printf("%-16s", "µç·Ñ");
+	printf("%-8s", "æ—¥æœŸ");
+	printf("%-16s", "å³°æ—¶ç”µé‡");
+	printf("%-16s", "è°·æ—¶ç”µé‡");
+	printf("%-16s", "æ€»ç”µé‡");
+	printf("%-16s", "ç”µè´¹");
 	printf("\n");
 }
 
-/*ÏÔÊ¾ÖØ¸´×¡»§ĞÅÏ¢*/
+/*æ˜¾ç¤ºé‡å¤ä½æˆ·ä¿¡æ¯*/
 void displaysame(int n)
 {
 	printf("%-8d", rec[n].id);
@@ -53,7 +53,7 @@ void displaysame(int n)
 	printf("\n");
 }
 
-/*ÏÔÊ¾²»ÖØ¸´×¡»§ĞÅÏ¢*/
+/*æ˜¾ç¤ºä¸é‡å¤ä½æˆ·ä¿¡æ¯*/
 void displaydifferent(int n)
 {
 	printf("%-8d", rec[n].date);
@@ -64,100 +64,100 @@ void displaydifferent(int n)
 	printf("\n");
 }
 
-/*±à¼­×¡»§ĞÅÏ¢*/
-void editRecord()//Ã»ÓĞ¸´ÖÆÒÑÓĞidµ½ĞÂ¼ÇÂ¼Àï
+/*ç¼–è¾‘ä½æˆ·ä¿¡æ¯*/
+void editRecord()//æ²¡æœ‰å¤åˆ¶å·²æœ‰idåˆ°æ–°è®°å½•é‡Œ
 {
 	int id;
-	printf("$ Â¼Èë×¡»§ĞÅÏ¢ $\n");
-	printf(" »§ºÅ£º");
-	scanf_s("%d", &rec[count].id);                 /*ÏÈÊäÈëÏÂÒ»ĞĞµÄ»§ºÅ*/
-	id = rec[count].id;                             /*¸³Öµ¸øid*/
+	printf("$ å½•å…¥ä½æˆ·ä¿¡æ¯ $\n");
+	printf(" æˆ·å·ï¼š");
+	scanf_s("%d", &rec[count].id);                 /*å…ˆè¾“å…¥ä¸‹ä¸€è¡Œçš„æˆ·å·*/
+	id = rec[count].id;                             /*èµ‹å€¼ç»™id*/
 	rec[count].id = 0;
-	change = findRecordByID(rec, id);              /*Ñ°ÕÒÊÇ·ñÒÑÓĞÏàÍ¬µÄ»§ºÅ*/
+	change = findRecordByID(rec, id);              /*å¯»æ‰¾æ˜¯å¦å·²æœ‰ç›¸åŒçš„æˆ·å·*/
 	rec[count].id = id;
-	if (change)//´Ë´¦ÊäÈëµÄĞÅÏ¢»á¿ÕÈ±£¬ÓĞ¿ÉÄÜ¶ÁÎÄ¼şÊ±¶Á²»µ½
+	if (change)//æ­¤å¤„è¾“å…¥çš„ä¿¡æ¯ä¼šç©ºç¼ºï¼Œæœ‰å¯èƒ½è¯»æ–‡ä»¶æ—¶è¯»ä¸åˆ°
 	{
-		printf(" ÒÑÓĞ¸ÃÓÃ»§ĞÅÏ¢£º\n");             /*Êä³öÏàÍ¬µÄĞÅÏ¢*/
+		printf(" å·²æœ‰è¯¥ç”¨æˆ·ä¿¡æ¯ï¼š\n");             /*è¾“å‡ºç›¸åŒçš„ä¿¡æ¯*/
 		displaysameTitle();
 		displaysame(change);
-		printf(" ÈÕÆÚ£º");                         /*ÊäÈë²»Í¬µÄĞÅÏ¢*/
+		printf(" æ—¥æœŸï¼š");                         /*è¾“å…¥ä¸åŒçš„ä¿¡æ¯*/
 		scanf_s("%d", &rec[count].date);
-		printf(" ·åÊ±µçÁ¿£º");
+		printf(" å³°æ—¶ç”µé‡ï¼š");
 		scanf_s("%lf", &rec[count].felectricity);
-		printf(" ¹ÈÊ±µçÁ¿£º");
+		printf(" è°·æ—¶ç”µé‡ï¼š");
 		scanf_s("%lf", &rec[count].gelectricity);
-		change = 0;                               /*°Ñchange¸ÄÎª0*/
+		change = 0;                               /*æŠŠchangeæ”¹ä¸º0*/
 	}
 	else
 	{
-		printf(" »§Ãû£º");
+		printf(" æˆ·åï¼š");
 		scanf_s("%s", rec[count].name, 50);
-		printf(" Ğ¡Çø£º");
+		printf(" å°åŒºï¼š");
 		scanf_s("%s", rec[count].community, 50);
-		printf(" ÈÕÆÚ£º");
+		printf(" æ—¥æœŸï¼š");
 		scanf_s("%d", &rec[count].date);
-		printf(" ÈËÊı£º");
+		printf(" äººæ•°ï¼š");
 		scanf_s("%d", &rec[count].number);
-		printf(" ÊÇ·ñ²Î¼Ó·å¹È¼Æ·Ñ£º");
+		printf(" æ˜¯å¦å‚åŠ å³°è°·è®¡è´¹ï¼š");
 		scanf_s("%d", &rec[count].join);
-		printf(" ·åÊ±µçÁ¿£º");
+		printf(" å³°æ—¶ç”µé‡ï¼š");
 		scanf_s("%lf", &rec[count].felectricity);
-		printf(" ¹ÈÊ±µçÁ¿£º");
-		scanf_s("%lf", &rec[count].gelectricity);/*¼ÆËã×ÜµçÁ¿¡¢µç·Ñ*/
+		printf(" è°·æ—¶ç”µé‡ï¼š");
+		scanf_s("%lf", &rec[count].gelectricity);/*è®¡ç®—æ€»ç”µé‡ã€ç”µè´¹*/
 		rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 		rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 	}
 }
 
-/*Ìí¼Ó×¡»§Ñ¡Ïî*/
+/*æ·»åŠ ä½æˆ·é€‰é¡¹*/
 void addRecord()
 {
-	printf("$ Ìí¼Ó×¡»§ĞÅÏ¢ $\n");
+	printf("$ æ·»åŠ ä½æˆ·ä¿¡æ¯ $\n");
 	count++;
 	editRecord(rec);
-	printf("\n³É¹¦Ìí¼Ó×¡»§£¡\n");
+	printf("\næˆåŠŸæ·»åŠ ä½æˆ·ï¼\n");
 }
 
-/*É¾³ı×¡»§Ñ¡Ïî*/
+/*åˆ é™¤ä½æˆ·é€‰é¡¹*/
 void removeRecord()
 {
 	int id = 0;
 	int date = 0;
-	printf("$ ÊäÈë»§ºÅºÍÈÕÆÚ²éÕÒÒªÉ¾³ıµÄµç·Ñ¼ÇÂ¼ĞÅÏ¢ $\n");
-	printf(" ÊäÈë»§ºÅ£º");
+	printf("$ è¾“å…¥æˆ·å·å’Œæ—¥æœŸæŸ¥æ‰¾è¦åˆ é™¤çš„ç”µè´¹è®°å½•ä¿¡æ¯ $\n");
+	printf(" è¾“å…¥æˆ·å·ï¼š");
 	scanf_s("%d", &id);
-	printf(" ÊäÈëÈÕÆÚ£º");
+	printf(" è¾“å…¥æ—¥æœŸï¼š");
 	scanf_s("%d", &date);
 	int n = findRecordByIDdate(rec, id, date);
 	if (n)
 	{
 		while (n < count)
 		{
-			rec[n] = rec[++n];            /*ÓÃºóÒ»¸öÊı×é¸²¸ÇÇ°Ò»¸öÊı×é*/
+			rec[n] = rec[++n];            /*ç”¨åä¸€ä¸ªæ•°ç»„è¦†ç›–å‰ä¸€ä¸ªæ•°ç»„*/
 		}
-		count--;                          /*¼ÇÂ¼ÉÙÁËÒ»ĞĞ*/
-		printf("ÒÑÉ¾³ı¸ÃÌõĞÅÏ¢\n");
+		count--;                          /*è®°å½•å°‘äº†ä¸€è¡Œ*/
+		printf("å·²åˆ é™¤è¯¥æ¡ä¿¡æ¯\n");
 	}
 	else
 	{
-		printf("×¡»§ĞÅÏ¢ÖĞÎ´ÕÒµ½¸Ã×¡»§\n");
+		printf("ä½æˆ·ä¿¡æ¯ä¸­æœªæ‰¾åˆ°è¯¥ä½æˆ·\n");
 	}
 }
 
-/*ĞŞ¸Ä×¡»§Ñ¡Ïî*/
+/*ä¿®æ”¹ä½æˆ·é€‰é¡¹*/
 void modifyRecord()
 {
 	int id = 0;
 	int date = 0;
-	printf("$ ÊäÈë»§ºÅºÍÈÕÆÚ²éÕÒÒªĞŞ¸ÄµÄµç·Ñ¼ÇÂ¼ĞÅÏ¢ $\n");
-	printf(" ÊäÈë»§ºÅ£º");
+	printf("$ è¾“å…¥æˆ·å·å’Œæ—¥æœŸæŸ¥æ‰¾è¦ä¿®æ”¹çš„ç”µè´¹è®°å½•ä¿¡æ¯ $\n");
+	printf(" è¾“å…¥æˆ·å·ï¼š");
 	scanf_s("%d", &id);
-	printf(" ÊäÈëÈÕÆÚ£º");
+	printf(" è¾“å…¥æ—¥æœŸï¼š");
 	scanf_s("%d", &date);
 	change = findRecordByIDdate(rec, id, date);
 	if (change)
 	{
-		printf("$ ÕÒµ½ÒÔÏÂ×¡»§ĞÅÏ¢ $\n");
+		printf("$ æ‰¾åˆ°ä»¥ä¸‹ä½æˆ·ä¿¡æ¯ $\n");
 		displaysameTitle();
 		displaysame(change);
 		displaydifferentTitle();
@@ -167,48 +167,48 @@ void modifyRecord()
 	}
 	else
 	{
-		printf("×¡»§ĞÅÏ¢ÖĞÎ´ÕÒµ½¸Ã×¡»§\n");
+		printf("ä½æˆ·ä¿¡æ¯ä¸­æœªæ‰¾åˆ°è¯¥ä½æˆ·\n");
 	}
 }
 
-/*¸ü¸ÄÊÇ·ñ²Î¼Ó·å¹È¼Æ·Ñ*/
+/*æ›´æ”¹æ˜¯å¦å‚åŠ å³°è°·è®¡è´¹*/
 void changeif()
 {
-	printf(" ÊÇ·ñ²Î¼Ó·å¹È¼Æ·Ñ£º");
+	printf(" æ˜¯å¦å‚åŠ å³°è°·è®¡è´¹ï¼š");
 	scanf_s("%d", &rec[change].join);
 	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
-/*¸ü¸Ä·åÊ±µçÁ¿*/
+/*æ›´æ”¹å³°æ—¶ç”µé‡*/
 void changef()
 {
-	printf(" ·åÊ±µçÁ¿£º");
+	printf(" å³°æ—¶ç”µé‡ï¼š");
 	scanf_s("%lf", &rec[change].felectricity);
 	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
-/*¸ü¸Ä¹ÈÊ±µçÁ¿*/
+/*æ›´æ”¹è°·æ—¶ç”µé‡*/
 void changeg()
 {
-	printf(" ¹ÈÊ±µçÁ¿£º");
+	printf(" è°·æ—¶ç”µé‡ï¼š");
 	scanf_s("%lf", &rec[change].gelectricity);
 	rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 	rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 }
 
-/*²éÕÒ×¡»§Ñ¡Ïî*/
+/*æŸ¥æ‰¾ä½æˆ·é€‰é¡¹*/
 void findRecord()
 {
 	int id = 0;
-	printf("$ °´»§ºÅ²éÕÒµç·Ñ¼ÇÂ¼ĞÅÏ¢ $\n");
-	printf(" ÊäÈë»§ºÅ£º");
+	printf("$ æŒ‰æˆ·å·æŸ¥æ‰¾ç”µè´¹è®°å½•ä¿¡æ¯ $\n");
+	printf(" è¾“å…¥æˆ·å·ï¼š");
 	scanf_s("%d", &id);
 	int n = findRecordByID(rec, id);
 	if (n)
 	{
-		printf("$ ÕÒµ½ÒÔÏÂ×¡»§ĞÅÏ¢ $\n");
+		printf("$ æ‰¾åˆ°ä»¥ä¸‹ä½æˆ·ä¿¡æ¯ $\n");
 		displaysameTitle();
 		displaysame(n);
 		displaydifferentTitle();
@@ -216,11 +216,37 @@ void findRecord()
 	}
 	else
 	{
-		printf("×¡»§ĞÅÏ¢ÖĞÎ´ÕÒµ½¸Ã×¡»§\n");
+		printf("ä½æˆ·ä¿¡æ¯ä¸­æœªæ‰¾åˆ°è¯¥ä½æˆ·\n");
 	}
 }
+void findRecord()
+{	int id = 0;	printf("$ æŒ‰æˆ·å·æŸ¥æ‰¾ç”µè´¹è®°å½•ä¿¡æ¯ $\n");	
+printf(" è¾“å…¥æˆ·å·ï¼š");	
+scanf_s("%d", &id);
+	int add= findRecordByID(rec, id);
+	if (ï¼add)	
+ï½›
+printfâ€¦â€¦
+ï½
+else
+{		printf("$ æ‰¾åˆ°ä»¥ä¸‹ä½æˆ·ä¿¡æ¯ $\n");	
+	displaysameTitle();	
+	displaysame(n);		
+displaydifferentTitle();			
+while (add <= count)
+	{	
+	if (rec[add].id == id)
+ï½›
+displaydifferent(add);
+addï¼‹ï¼‹ï¼›
+ï½
+else
+ï½›
+addï¼‹ï¼‹ï¼›
+ï½
 
-/*Í¨¹ı»§ºÅ²éÕÒ×¡»§Ñ¡Ïî*/
+
+/*é€šè¿‡æˆ·å·æŸ¥æ‰¾ä½æˆ·é€‰é¡¹*/
 int findRecordByID(Record* rec, int id)
 {
 	int i = 0;
@@ -236,13 +262,13 @@ int findRecordByID(Record* rec, int id)
 }
 
 
-/*Í¨¹ı»§ºÅºÍÈÕÆÚ²éÕÒ×¡»§Ñ¡Ïî*/
+/*é€šè¿‡æˆ·å·å’Œæ—¥æœŸæŸ¥æ‰¾ä½æˆ·é€‰é¡¹*/
 int findRecordByIDdate(Record* rec, int id, int date)
 {
 	int i = 0;
 	while (i <= count)
 	{
-		if ((rec[i].id == id) && (rec[i].date == date))   /*Á½¸öÌõ¼şÍ¬Ê±Âú×ã*/
+		if ((rec[i].id == id) && (rec[i].date == date))   /*ä¸¤ä¸ªæ¡ä»¶åŒæ—¶æ»¡è¶³*/
 		{
 			return i;
 		}
@@ -253,25 +279,25 @@ int findRecordByIDdate(Record* rec, int id, int date)
 
 
 
-/*ÒÑÀ©ÈİĞ¡ÇøÃûµ¥*/
+/*å·²æ‰©å®¹å°åŒºåå•*/
 void UnList()
 {
 
 }
 
-/*Î´À©ÈİĞ¡ÇøÃûµ¥*/
+/*æœªæ‰©å®¹å°åŒºåå•*/
 void List()
 {
 
 }
 
-/*¼±ĞèÀ©ÈİĞ¡ÇøÃûµ¥*/
+/*æ€¥éœ€æ‰©å®¹å°åŒºåå•*/
 void need()
 {
 
 }
 
-/*²»¼±ĞèÀ©ÈİĞ¡ÇøÃûµ¥*/
+/*ä¸æ€¥éœ€æ‰©å®¹å°åŒºåå•*/
 void unneeded()
 {
 
@@ -279,7 +305,7 @@ void unneeded()
 
 
 
-/*¼ÆËã×Üµç·Ñ*/
+/*è®¡ç®—æ€»ç”µè´¹*/
 double rate(double felectricity, double gelectricity, double electricity, int number, int join)
 {
 	switch (join)
@@ -292,7 +318,7 @@ double rate(double felectricity, double gelectricity, double electricity, int nu
 	return 0;
 }
 
-/*¼ÆËã²»²ÎÓë·å¹ÈµÄµç·Ñ*/
+/*è®¡ç®—ä¸å‚ä¸å³°è°·çš„ç”µè´¹*/
 double unfgrate(double electricity, int number)
 {
 	if (number >= 0 && number <= 4 && electricity >= 0 && number <= 230)
@@ -342,7 +368,7 @@ double unfgrate(double electricity, int number)
 	return 0;
 }
 
-/*¼ÆËã·å¹Èµç·Ñ*/
+/*è®¡ç®—å³°è°·ç”µè´¹*/
 double fgrate(double felectricity, double gelectricity, double electricity, int number)
 {
 
