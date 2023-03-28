@@ -5,6 +5,7 @@
 
 int count = 0;                 /*用于计算记录条数*/
 int change = 0;                /*用于在更改记录时确定地址*/
+int add = 0;                   /*用于控制输出同一户号下的不同记录*/
 
 /*主菜单*/
 void menuMain()
