@@ -9,7 +9,7 @@ void runfindcommunity(int choice)
 {
 	switch (choice)
 	{
-	case 1:displayCommunitByDate();                      /*选择按日期显示小区信息功能*/
+	case 1:displayCommunitByDate();                 /*选择按日期显示小区信息功能*/
 		break;
 	case 2:displayCommunitByID();                   /*选择按户号显示小区信息功能*/
 		break;
@@ -47,7 +47,7 @@ void runstatistician(int choice)
 {
 	switch (choice)
 	{
-	case 1:find();                  /*选择查询电费记录信息功能*/
+	case 1:find();                        /*选择查询电费记录信息功能*/
 		break;
 	case 2:addRecord();                   /*选择添加住户电费记录信息功能*/
 		break;
@@ -63,7 +63,7 @@ void runstaff(int choice)
 {
 	switch (choice)
 	{
-	case 1:find();                  /*选择查询电费记录信息功能*/
+	case 1:find();                        /*选择查询电费记录信息功能*/
 		break;
 	case 2:expansion();                   /*选择扩容管理功能*/
 		break; 

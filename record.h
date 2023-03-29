@@ -53,7 +53,7 @@ void findRecord();
 int findRecordByID(Record* p, int id);
 
 /*通过户号和日期查找住户选项*/
-int findRecordByIDdate(Record* p, int id,int date);
+int findRecordByIDdate(Record* p, int id,int year,int month);
 
 
 

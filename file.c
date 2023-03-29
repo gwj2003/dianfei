@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include "file.h"
@@ -16,7 +17,9 @@ int readRecordFile(Record* rec)//需要修改，将文件的内容读入内存
 		while (!feof(fp))
 		{
 			i++;
-			fread(rec, sizerec, 1, fp);
+			fscanf(fp, "%d%s%s%d%d%d%d%lf%lf%lf%lf",&rec[i].id,rec[i].name,rec[i].community, &rec[i].year, &rec[i].month, &rec[i].number, &rec[i].join, &rec[i]. felectricity, &rec[i]. gelectricity, &rec[i].electricity, &rec[i].power_rate);
+			displaysame(i);
+			displaydifferent(i);
 		}
 		fclose(fp);
 		return i;
@@ -35,18 +38,19 @@ void saveFile(Record* rec, int count)
 	fopen_s(&fp, "record.txt", "w");
 	if (fp)                                    /*以写方式打开指定文件*/
 	{
-		for (int i = 1; i <= count; ++i)       /*所有数据以此写入*/
+		for (int i = 1; i <=  count; ++i)       /*所有数据以此写入*/
 		{
-			fprintf(fp, "%d", rec[i].id);
-			fprintf(fp, "%s", rec[i].name);
-			fprintf(fp, "%s", rec[i].community);
-			fprintf(fp, "%d", rec[i].date);
-			fprintf(fp, "%d", rec[i].number);
-			fprintf(fp, "%d", rec[i].join);
-			fprintf(fp, "%lf", rec[i].felectricity);
-			fprintf(fp, "%lf", rec[i].gelectricity);
-			fprintf(fp, "%lf", rec[i].electricity);
-			fprintf(fp, "%lf", rec[i].power_rate);
+			fprintf(fp, "%d ", rec[i].id);
+			fprintf(fp, "%s ", rec[i].name);
+			fprintf(fp, "%s ", rec[i].community);
+			fprintf(fp, "%d ", rec[i].year);
+			fprintf(fp, "%d ", rec[i].month);
+			fprintf(fp, "%d ", rec[i].number);
+			fprintf(fp, "%d ", rec[i].join);
+			fprintf(fp, "%lf ", rec[i].felectricity);
+			fprintf(fp, "%lf ", rec[i].gelectricity);
+			fprintf(fp, "%lf ", rec[i].electricity);
+			fprintf(fp, "%lf ", rec[i].power_rate);
 		}
 		fclose(fp);                            /*然后退出*/
 	}

@@ -7,7 +7,6 @@
 
 extern int count;
 extern int change;
-extern int add;
 
 /*按日期显示小区信息*/;
 void displayCommunitByDate()
@@ -64,7 +63,8 @@ void displaysameTitle()
 /*显示不同住户标题*/
 void displaydifferentTitle()
 {
-	printf("%-8s", "日期");
+	printf("%-8s", "年份");
+	printf("%-8s", "月份");
 	printf("%-16s", "峰时电量");
 	printf("%-16s", "谷时电量");
 	printf("%-16s", "总电量");
@@ -86,7 +86,8 @@ void displaysame(int n)
 /*显示不重复住户信息*/
 void displaydifferent(int n)
 {
-	printf("%-8d", rec[n].date);
+	printf("%-8d", rec[n].year);
+	printf("%-8d", rec[n].month);
 	printf("%-16lf", rec[n].felectricity);
 	printf("%-16lf", rec[n].gelectricity);
 	printf("%-16lf", rec[n].electricity);
@@ -110,8 +111,10 @@ void editRecord()//没有复制已有id到新记录里
 		printf(" 已有该用户信息：\n");             /*输出相同的信息*/
 		displaysameTitle();
 		displaysame(change);
-		printf(" 日期：");                         /*输入不同的信息*/
-		scanf_s("%d", &rec[count].date);
+		printf(" 年份：");                         /*输入不同的信息*/
+		scanf_s("%d", &rec[count].year);
+		printf(" 月份：");                         
+		scanf_s("%d", &rec[count].month);
 		printf(" 峰时电量：");
 		scanf_s("%lf", &rec[count].felectricity);
 		printf(" 谷时电量：");
@@ -126,8 +129,10 @@ void editRecord()//没有复制已有id到新记录里
 		scanf_s("%s", rec[count].name, 50);
 		printf(" 小区：");
 		scanf_s("%s", rec[count].community, 50);
-		printf(" 日期：");
-		scanf_s("%d", &rec[count].date);
+		printf(" 年份：");
+		scanf_s("%d", &rec[count].year);
+		printf(" 月份：");
+		scanf_s("%d", &rec[count].month);
 		printf(" 人数：");
 		scanf_s("%d", &rec[count].number);
 		printf(" 是否参加峰谷计费：");
@@ -154,13 +159,16 @@ void addRecord()
 void removeRecord()
 {
 	int id = 0;
-	int date = 0;
+	int year = 0;
+	int month = 0;
 	printf("$ 输入户号和日期查找要删除的电费记录信息 $\n");
 	printf(" 输入户号：");
 	scanf_s("%d", &id);
-	printf(" 输入日期：");
-	scanf_s("%d", &date);
-	int n = findRecordByIDdate(rec, id, date);
+	printf(" 输入年份：");
+	scanf_s("%d", &year);
+	printf(" 输入月份：");
+	scanf_s("%d", &month);
+	int n = findRecordByIDdate(rec, id, year,month);
 	if (n)
 	{
 		while (n < count)
@@ -180,13 +188,16 @@ void removeRecord()
 void modifyRecord()
 {
 	int id = 0;
-	int date = 0;
+	int year = 0;
+	int month = 0;
 	printf("$ 输入户号和日期查找要修改的电费记录信息 $\n");
 	printf(" 输入户号：");
 	scanf_s("%d", &id);
-	printf(" 输入日期：");
-	scanf_s("%d", &date);
-	change = findRecordByIDdate(rec, id, date);
+	printf(" 输入年份：");
+	scanf_s("%d", &year);
+	printf(" 输入月份：");
+	scanf_s("%d", &month);
+	change = findRecordByIDdate(rec, id, year,month);
 	if (change)
 	{
 		printf("$ 找到以下住户信息 $\n");
@@ -282,12 +293,12 @@ int findRecordByID(Record* rec, int id)
 
 
 /*通过户号和日期查找住户选项*/
-int findRecordByIDdate(Record* rec, int id, int date)
+int findRecordByIDdate(Record* rec, int id, int year,int month)
 {
 	int i = 0;
 	while (i <= count)
 	{
-		if ((rec[i].id == id) && (rec[i].date == date))   /*两个条件同时满足*/
+		if ((rec[i].id == id) && (rec[i].year == year) && (rec[i].month == month))   /*两个条件同时满足*/
 		{
 			return i;
 		}
