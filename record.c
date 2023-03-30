@@ -17,11 +17,8 @@ void displayCommunitByDate()
 /*按户号显示小区信息*/
 void displayCommunitByID()
 {
-	char com;
+	int n = findCommunitBy(rec);
 	printf("$ 按户号显示小区电费记录信息 $\n");
-	printf(" 输入小区名：");
-	scanf_s("%s", &com, 50);
-	int n = findCommunitBy(rec, com);
 	if (n)
 	{
 		printf(" 小区名：");
@@ -35,13 +32,15 @@ void displayCommunitByID()
 }
 
 /*通过小区名查找*/
-int findCommunitBy(Record* rec, char* com)
+int findCommunitBy(Record* rec)
 {
-	int i = 0;
+	int i = 1;
+	char com[50];
+	printf(" 输入小区名：");
+	scanf_s("%s", &com, 50);
 	while (i <= count)
 	{
-		int n = strcmp(&rec[i].community, com);
-		if (!n)
+		if (strcmp(rec[i].community, com) == 0);
 		{
 			return i;
 		}
