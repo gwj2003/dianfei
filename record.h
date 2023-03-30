@@ -5,13 +5,13 @@
 #include "file.h"
 
 /*按日期显示小区信息*/
-void displayCommunitByDate();
+void displayCommunityByDate();
 
 /*按户号显示小区信息*/
-void displayCommunitByID();
+void displayCommunityByID();
 
 /*通过小区名查找*/
-int findCommunity();
+int findCommunityname(Record* rec);
 
 /*显示相同住户标题*/
 void displaysameTitle();
@@ -50,10 +50,10 @@ void changeg();
 void findRecord();
 
 /*通过户号查找住户选项*/
-int findRecordByID(int id);
+int findRecordByID(Record* p, int id);
 
 /*通过户号和日期查找住户选项*/
-int findRecordByIDdate(int id, int year, int month);
+int findRecordByIDdate(Record* p, int id,int year,int month);
 
 
 
@@ -70,7 +70,6 @@ void need();
 
 /*不急需扩容小区名单*/
 void unneeded();
-
 
 
 

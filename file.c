@@ -6,7 +6,7 @@
 extern int count;
 
 /*从文件中加载住户信息*/
-int readRecordFile()
+int readRecordFile(Record* rec)
 {
 	FILE* fp;
 	int i = 0;
@@ -41,7 +41,7 @@ int readRecordFile()
 }
 
 /*在文件中保存住户信息*/
-void saveFile(int count)
+void saveFile(Record* rec, int count)
 {
 	FILE* fp;
 	fopen_s(&fp, "record.txt", "w");

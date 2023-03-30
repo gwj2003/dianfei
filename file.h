@@ -22,11 +22,11 @@ typedef struct Record
 Record rec[STR_LEN];
 
 /*从文件中加载住户信息*/
-int readRecordFile();
+int readRecordFile(Record* rec);
 
 #define sizerec sizeof(Record)     /*计算结构体长度*/
 
 /*在文件中保存住户信息*/
-void saveFile(int n);
+void saveFile(Record* rec, int n);
 
 #endif

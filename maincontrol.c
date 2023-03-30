@@ -12,9 +12,9 @@ void runfindcommunity(int choice)
 {
 	switch (choice)
 	{
-	case 1:displayCommunitByDate();                 /*选择按日期显示小区信息功能*/
+	case 1:displayCommunityByDate();                 /*选择按日期显示小区信息功能*/
 		break;
-	case 2:displayCommunitByID();                   /*选择按户号显示小区信息功能*/
+	case 2:displayCommunityByID();                   /*选择按户号显示小区信息功能*/
 		break;
 	}
 }
