@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include "file.h"
@@ -7,7 +6,7 @@
 extern int count;
 
 /*从文件中加载住户信息*/
-int readRecordFile(Record* rec)//需要修改，将文件的内容读入内存
+int readRecordFile(Record* rec)
 {
 	FILE* fp;
 	int i = 0;
@@ -17,7 +16,17 @@ int readRecordFile(Record* rec)//需要修改，将文件的内容读入内存
 		while (!feof(fp))
 		{
 			i++;
-			fscanf(fp, "%d%s%s%d%d%d%d%lf%lf%lf%lf",&rec[i].id,rec[i].name,rec[i].community, &rec[i].year, &rec[i].month, &rec[i].number, &rec[i].join, &rec[i]. felectricity, &rec[i]. gelectricity, &rec[i].electricity, &rec[i].power_rate);
+			fscanf_s(fp, "%d ", &rec[i].id);
+			fscanf_s(fp, "%s ", rec[i].name,50);
+			fscanf_s(fp, "%s ", rec[i].community,50);
+			fscanf_s(fp, "%d ", &rec[i].year);
+			fscanf_s(fp, "%d ", &rec[i].month);
+			fscanf_s(fp, "%d ", &rec[i].number);
+			fscanf_s(fp, "%d ", &rec[i].join);
+			fscanf_s(fp, "%lf ", &rec[i].felectricity);
+			fscanf_s(fp, "%lf ", &rec[i].gelectricity);
+			fscanf_s(fp, "%lf ", &rec[i].electricity);
+			fscanf_s(fp, "%lf ", &rec[i].power_rate);
 			displaysame(i);
 			displaydifferent(i);
 		}
@@ -51,6 +60,7 @@ void saveFile(Record* rec, int count)
 			fprintf(fp, "%lf ", rec[i].gelectricity);
 			fprintf(fp, "%lf ", rec[i].electricity);
 			fprintf(fp, "%lf ", rec[i].power_rate);
+			fprintf(fp, "\n ");
 		}
 		fclose(fp);                            /*然后退出*/
 	}

@@ -3,8 +3,7 @@
 #include "maincontrol.h"
 #include "record.h"
 
-int count = 0;                 /*用于计算记录条数*/
-int change = 0;                /*用于在更改记录时确定地址*/
+extern int count;
 
 /*主菜单*/
 void menuMain()

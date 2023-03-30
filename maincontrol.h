@@ -1,6 +1,6 @@
 #ifndef _MAINCONTROL
 #define _MAINCONTROL
-#define _CRT_SECURE_NO_WARNINGS
+
 /*选择按小区查询电费记录信息功能*/
 void runfindcommunity(int choice);
 

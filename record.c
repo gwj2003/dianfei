@@ -20,9 +20,9 @@ void displayCommunitByID()
 	char com;
 	printf("$ 按户号显示小区电费记录信息 $\n");
 	printf(" 输入小区名：");
-	scanf_s("%s", &com,50);
-	int n = findCommunitByID( rec, com);
-	if(n)
+	scanf_s("%s", &com, 50);
+	int n = findCommunitBy(rec, com);
+	if (n)
 	{
 		printf(" 小区名：");
 		printf("%-8s", rec[n].community);
@@ -35,12 +35,13 @@ void displayCommunitByID()
 }
 
 /*通过小区名查找*/
-int findCommunitByID(Record* rec, char com)
+int findCommunitBy(Record* rec, char* com)
 {
 	int i = 0;
 	while (i <= count)
 	{
-		if ((strcmp(rec[i].community,com)==0))
+		int n = strcmp(&rec[i].community, com);
+		if (!n)
 		{
 			return i;
 		}
@@ -96,7 +97,7 @@ void displaydifferent(int n)
 }
 
 /*编辑住户信息*/
-void editRecord()//没有复制已有id到新记录里
+void editRecord()
 {
 	int id;
 	printf("$ 录入住户信息 $\n");
@@ -106,14 +107,18 @@ void editRecord()//没有复制已有id到新记录里
 	rec[count].id = 0;
 	change = findRecordByID(rec, id);              /*寻找是否已有相同的户号*/
 	rec[count].id = id;
-	if (change)//此处输入的信息会空缺，有可能读文件时读不到
+	if (change)
 	{
 		printf(" 已有该用户信息：\n");             /*输出相同的信息*/
 		displaysameTitle();
 		displaysame(change);
-		printf(" 年份：");                         /*输入不同的信息*/
+		memcpy(rec[count].name, rec[change].name, STR_LEN);
+		memcpy(rec[count].community, rec[change].community, STR_LEN);
+		rec[count].number = rec[change].number;
+		rec[count].join = rec[change].join;
+		printf(" 年份：");
 		scanf_s("%d", &rec[count].year);
-		printf(" 月份：");                         
+		printf(" 月份：");
 		scanf_s("%d", &rec[count].month);
 		printf(" 峰时电量：");
 		scanf_s("%lf", &rec[count].felectricity);
@@ -168,7 +173,7 @@ void removeRecord()
 	scanf_s("%d", &year);
 	printf(" 输入月份：");
 	scanf_s("%d", &month);
-	int n = findRecordByIDdate(rec, id, year,month);
+	int n = findRecordByIDdate(rec, id, year, month);
 	if (n)
 	{
 		while (n < count)
@@ -197,7 +202,7 @@ void modifyRecord()
 	scanf_s("%d", &year);
 	printf(" 输入月份：");
 	scanf_s("%d", &month);
-	change = findRecordByIDdate(rec, id, year,month);
+	change = findRecordByIDdate(rec, id, year, month);
 	if (change)
 	{
 		printf("$ 找到以下住户信息 $\n");
@@ -293,7 +298,7 @@ int findRecordByID(Record* rec, int id)
 
 
 /*通过户号和日期查找住户选项*/
-int findRecordByIDdate(Record* rec, int id, int year,int month)
+int findRecordByIDdate(Record* rec, int id, int year, int month)
 {
 	int i = 0;
 	while (i <= count)

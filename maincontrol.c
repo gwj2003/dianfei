@@ -4,6 +4,9 @@
 #include"menu.h"
 #include"record.h"
 
+int count = 0;                 /*用于计算记录条数*/
+int change = 0;                /*用于在更改记录时确定地址*/
+
 /*选择按小区查询电费记录信息功能*/
 void runfindcommunity(int choice)
 {
@@ -33,7 +36,7 @@ void runmenuMain(int choice)
 {
 	switch (choice)
 	{
-	case 1: 
+	case 1:
 		statistician();                    /*选择了记录人员的身份*/
 		break;
 	case 2:
@@ -66,7 +69,7 @@ void runstaff(int choice)
 	case 1:find();                        /*选择查询电费记录信息功能*/
 		break;
 	case 2:expansion();                   /*选择扩容管理功能*/
-		break; 
+		break;
 	}
 }
 
@@ -74,7 +77,7 @@ void runstaff(int choice)
 void  runchange(int choice)
 {
 	switch (choice)
-	{ 
+	{
 	case 1:changeif();                   /*选择修改是否参加峰谷计费功能*/
 		break;
 	case 2:changef();                    /*选择修改峰时电量功能*/
@@ -103,7 +106,7 @@ void runexpansion(int choice)
 /*主函数*/
 int main()
 {
-	int count = readRecordFile(rec);     /*数一下原有的文件中有几行数据*/
-	menuMain();                          /*打开主菜单*/
+	count = readRecordFile(rec);       /*数一下原有的文件中有几行数据*/
+	menuMain();                        /*打开主菜单*/
 	return 0;
 }
