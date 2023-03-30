@@ -11,7 +11,7 @@ void displayCommunitByDate();
 void displayCommunitByID();
 
 /*通过小区名查找*/
-int findCommunit(Record* rec, char com);
+int findCommunity();
 
 /*显示相同住户标题*/
 void displaysameTitle();
@@ -50,10 +50,10 @@ void changeg();
 void findRecord();
 
 /*通过户号查找住户选项*/
-int findRecordByID(Record* p, int id);
+int findRecordByID(int id);
 
 /*通过户号和日期查找住户选项*/
-int findRecordByIDdate(Record* p, int id,int year,int month);
+int findRecordByIDdate(int id, int year, int month);
 
 
 
@@ -70,6 +70,7 @@ void need();
 
 /*不急需扩容小区名单*/
 void unneeded();
+
 
 
 
