@@ -12,30 +12,48 @@ extern int id;
 /*按日期显示小区信息*/;
 void displayCommunityByDate()
 {
-	int n = findCommunityname(rec);
-	printf("$ 按户号显示小区电费记录信息 $\n");
-	if (n)
-	{
-		printf(" 小区名：");
-		printf("%-8s", rec[n].community);
-		printf("户号:        户名:        \n");
-	}
-	else
-	{
-		printf("住户信息中未找到该小区\n");
-	}
+	
 }
 
 /*按户号显示小区信息*/
 void displayCommunityByID()
 {
-	int n = findCommunityname(rec);
+	change = findCommunityname(rec);
 	printf("$ 按户号显示小区电费记录信息 $\n");
-	if (n)
+	if (change)
 	{
 		printf(" 小区名：");
-		printf("%-8s", rec[n].community);
-		printf("户号:        户名:        \n");
+		printf("%-8s", rec[change].community);
+		printf("\n");
+		printf(" 户号:   户名：  峰时：          谷时：          总用电量：      电费：\n");
+		int n = 0, x = 0;
+		double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
+		n = change;
+		id = rec[n].id;
+		while (n <= count)
+		{
+			if (rec[n].id == id)
+			{
+
+				f += rec[n].felectricity;
+				g += rec[n].gelectricity;
+				all += rec[n].electricity;
+				rate += rec[n].power_rate;
+				x++;
+				n++;
+			}
+			else
+			{
+				n++;
+			}
+		}
+		printf(" %-8s", rec[change].name);
+		printf("%-8d", rec[change].id);
+		printf("%-16lf", f);
+		printf("%-16lf", g);
+		printf("%-16lf", all);
+		printf("%-16lf", rate);
+		printf("%\n");
 	}
 	else
 	{
@@ -329,7 +347,7 @@ void changeg()
 /*查找住户选项*/
 void findRecord()
 {
-	int id = 0, x = 0;
+	int x = 0;
 	double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
 	printf("$ 按户号查找电费记录信息 $\n");
 	printf(" 输入户号：");
@@ -376,6 +394,7 @@ void findRecord()
 		printf("%-16lf", (rate / x));
 		printf("%\n");
 	}
+	id = 0;
 }
 
 /*通过户号查找住户选项*/
