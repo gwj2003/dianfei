@@ -6,6 +6,7 @@
 
 int count = 0;                 /*用于计算记录条数*/
 int change = 0;                /*用于在更改记录时确定地址*/
+int id = 0;                      /*用于在更改记录时确定户号*/
 
 /*选择按小区查询电费记录信息功能*/
 void runfindcommunity(int choice)
@@ -56,7 +57,27 @@ void runstatistician(int choice)
 		break;
 	case 3:removeRecord();                /*选择删除住户电费记录信息功能*/
 		break;
-	case 4:modifyRecord();                /*选择修改住户电费记录信息功能*/
+	case 4:modify();                     /*选择修改住户电费记录信息功能*/
+		break;
+	}
+}
+
+/*选择修改住户电费记录信息功能*/
+void runmodify(int choice)
+{
+	switch (choice)
+	{
+	case 1:modifyRecord();                /*修改某月用电记录*/
+		printf(" 修改成功");
+		break;
+	case 2:modifyname();                  /*修改小区名*/
+		printf(" 修改成功");
+		break;
+	case 3:modifynumber();                /*修改住户人数*/
+		printf(" 修改成功");
+		break;
+	case 4:modifyjoin();                  /*修改是否参加峰谷计费*/
+		printf(" 修改成功");
 		break;
 	}
 }
@@ -78,11 +99,9 @@ void  runchange(int choice)
 {
 	switch (choice)
 	{
-	case 1:changeif();                   /*选择修改是否参加峰谷计费功能*/
+	case 1:changef();                    /*选择修改峰时电量功能*/
 		break;
-	case 2:changef();                    /*选择修改峰时电量功能*/
-		break;
-	case 3:changeg();                    /*选择修改谷时电量功能*/
+	case 2:changeg();                    /*选择修改谷时电量功能*/
 		break;
 	}
 }

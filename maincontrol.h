@@ -13,6 +13,9 @@ void runmenuMain(int choice);
 /*选择记录人员功能*/
 void runstatistician(int choice);
 
+/*选择修改住户电费记录信息功能*/
+void runmodify(int choice);
+
 /*选择工作人员功能*/
 void runstaff(int choice);
 

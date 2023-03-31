@@ -11,6 +11,9 @@ void menuMain();
 /*电费数据记录人员*/
 void statistician();
 
+/*选择修改住户电费记录信息功能*/
+void modify();
+
 /*供电公司工作人员*/
 void staff();
 
@@ -20,7 +23,7 @@ void ask();
 /*选择查询电费记录信息功能*/
 void find();
 
-/*选择查询小区电费记录信息功能*/
+/*选择如何显示小区电费记录信息功能*/
 void findcommunity();
 
 /*扩容管理*/

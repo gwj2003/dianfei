@@ -34,11 +34,17 @@ void addRecord();
 /*删除住户选项*/
 void removeRecord();
 
-/*修改住户选项*/
+/*修改某月用电记录*/
 void modifyRecord();
 
-/*更改是否参加峰谷计费*/
-void changeif();
+/*修改小区名*/
+void modifyname();
+
+/*修改住户人数*/
+void modifynumber();
+
+/*修改是否参加峰谷计费*/
+void modifyjoin();
 
 /*更改峰时电量*/
 void changef();

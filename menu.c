@@ -2,8 +2,10 @@
 #include "menu.h"
 #include "maincontrol.h"
 #include "record.h"
-
+ 
 extern int count;
+extern int change;
+extern int id;
 
 /*主菜单*/
 void menuMain()
@@ -53,8 +55,34 @@ void statistician()
 			printf("\n");
 			printf("请重新输入\n\n");
 		}
-		
+	} while (choice);
+}
 
+/*选择修改住户电费记录信息功能*/
+void modify()
+{
+	int choice;
+	do
+	{
+		printf("\n$ 选择修改住户电费记录信息功能 $\n");
+		printf("[1] 修改某户某月用电记录\n");
+		printf("[2] 修改小区名\n");
+		printf("[3] 修改住户人数\n");
+		printf("[4] 修改是否参加峰谷计费\n");
+		printf("[0] 返回\n");
+		printf("\n");
+		printf("请选择：");
+		scanf_s("%d", &choice);
+		if (choice >=0 && choice <= 4)
+		{
+			runmodify(choice);
+			id = 0;
+		}
+		else
+		{
+			printf("\n");
+			printf("请重新输入\n\n");
+		}
 	} while (choice);
 }
 
@@ -72,7 +100,9 @@ void staff()
 		printf("请选择：");
 		scanf_s("%d", &choice);
 		if (choice >= 0 && choice <= 2)
+		{
 			runstaff(choice);
+		}
 		else
 		{
 			printf("\n");
@@ -87,14 +117,13 @@ void ask()
 	int choice;
 	do
 	{
-		printf("[1] 修改是否参加峰谷计费\n");
-		printf("[2] 修改峰时电量\n");
-		printf("[3] 修改谷时电量\n");
+		printf("[1] 修改峰时电量\n");
+		printf("[2] 修改谷时电量\n");
 		printf("[0] 返回\n");
 		printf("\n");
 		printf("请选择：");
 		scanf_s("%d", &choice);
-		if (choice >= 0 && choice <= 3)
+		if (choice >= 0 && choice <= 2)
 		{
 			runchange(choice);
 		}
@@ -106,7 +135,7 @@ void ask()
 	} while (choice);
 }
 
-/*选择查询小区电费记录信息功能*/
+/*选择查询电费记录信息功能*/
 void find()
 {
 	int choice;
@@ -130,7 +159,7 @@ void find()
 	} while (choice);
 }
 
-/*选择查询小区电费记录信息功能*/
+/*选择如何显示小区电费记录信息功能*/
 void findcommunity()
 {
 	int choice;
@@ -169,7 +198,9 @@ void expansion()
 		printf("请选择：");
 		scanf_s("%d", &choice);
 		if (choice >= 0 && choice <= 4)
+		{
 			runexpansion(choice);
+		}
 		else
 		{
 			printf("\n");

@@ -17,8 +17,8 @@ int readRecordFile(Record* rec)
 		{
 			i++;
 			fscanf_s(fp, "%d ", &rec[i].id);
-			fscanf_s(fp, "%s ", rec[i].name,50);
-			fscanf_s(fp, "%s ", rec[i].community,50);
+			fscanf_s(fp, "%s ", rec[i].name, STR_LEN);
+			fscanf_s(fp, "%s ", rec[i].community, STR_LEN);
 			fscanf_s(fp, "%d ", &rec[i].year);
 			fscanf_s(fp, "%d ", &rec[i].month);
 			fscanf_s(fp, "%d ", &rec[i].number);
@@ -27,8 +27,6 @@ int readRecordFile(Record* rec)
 			fscanf_s(fp, "%lf ", &rec[i].gelectricity);
 			fscanf_s(fp, "%lf ", &rec[i].electricity);
 			fscanf_s(fp, "%lf ", &rec[i].power_rate);
-			displaysame(i);
-			displaydifferent(i);
 		}
 		fclose(fp);
 		return i;
