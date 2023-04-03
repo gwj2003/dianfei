@@ -23,10 +23,12 @@ int readRecordFile(Record* rec)
 			fscanf_s(fp, "%d ", &rec[i].month);
 			fscanf_s(fp, "%d ", &rec[i].number);
 			fscanf_s(fp, "%d ", &rec[i].join);
+			fscanf_s(fp, "%d ", &rec[i].list);
 			fscanf_s(fp, "%lf ", &rec[i].felectricity);
 			fscanf_s(fp, "%lf ", &rec[i].gelectricity);
 			fscanf_s(fp, "%lf ", &rec[i].electricity);
 			fscanf_s(fp, "%lf ", &rec[i].power_rate);
+			fscanf_s(fp, "%d ", &rec[i].count);
 		}
 		fclose(fp);
 		return i;
@@ -54,10 +56,12 @@ void saveFile(Record* rec, int count)
 			fprintf(fp, "%d ", rec[i].month);
 			fprintf(fp, "%d ", rec[i].number);
 			fprintf(fp, "%d ", rec[i].join);
+			fprintf(fp, "%d ", rec[i].list);
 			fprintf(fp, "%lf ", rec[i].felectricity);
 			fprintf(fp, "%lf ", rec[i].gelectricity);
 			fprintf(fp, "%lf ", rec[i].electricity);
 			fprintf(fp, "%lf ", rec[i].power_rate);
+			fprintf(fp, "%d ", rec[i].count);
 			fprintf(fp, "\n ");
 		}
 		fclose(fp);                            /*È»ºóÍË³ö*/

@@ -13,10 +13,12 @@ typedef struct Record
 	int month;                      /*月份*/
 	int number;                     /*人数*/
 	int join;                       /*是否参加峰谷计费,1为参加2为不参加*/
+	int list;                       /*是否扩容,1为已扩容2为未扩容*/
 	double felectricity;            /*峰时电量*/
 	double gelectricity;            /*谷时电量*/
 	double electricity;             /*总电量*/
 	double power_rate;              /*电费*/
+	int count;
 } Record;
 
 Record rec[STR_LEN];

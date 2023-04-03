@@ -11,7 +11,7 @@ void displayCommunityByDate();
 void displayCommunityByID();
 
 /*通过小区名查找*/
-int findCommunityname(Record* rec);
+int findCommunityname(Record* rec,char com);
 
 /*显示相同住户标题*/
 void displaysameTitle();
