@@ -69,11 +69,12 @@ void modify()
 		printf("[2] 修改小区名\n");
 		printf("[3] 修改住户人数\n");
 		printf("[4] 修改是否参加峰谷计费\n");
+		printf("[5] 修改小区是否扩容\n");
 		printf("[0] 返回\n");
 		printf("\n");
 		printf("请选择：");
 		scanf_s("%d", &choice);
-		if (choice >=0 && choice <= 4)
+		if (choice >=0 && choice <= 5)
 		{
 			runmodify(choice);
 			id = 0;

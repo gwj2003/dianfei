@@ -19,27 +19,25 @@ void displayCommunityByDate()
 	if (change)
 	{
 		printf("$ 按日期显示小区电费记录信息 $\n");
-		printf(" 小区名：是否扩容：");
+		printf(" 小区名：是否扩容：\n");
 		printf("%-8s", rec[change].community);
 		printf("%-8d", rec[change].list);
 		printf("\n");
 		printf(" 年份:   月份：  峰时：          谷时：          总用电量：      电费：\n");
 		int n = change;
-		while (n <= count)
+		while (n)
 		{
 			int i = n;
-			int x = 0;
 			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
-			while (n <= count)
+			while (i <= count)
 			{
-				if ((strcmp(rec[change].community, com) == 0) && rec[n].year == rec[i].year && rec[n].month == rec[i].month)
+				if ((strcmp(rec[i].community, com) == 0) && rec[n].year == rec[i].year && rec[n].month == rec[i].month)
 				{
-					rec[n].count = 0;
+					rec[i].count = 0;
 					f += rec[i].felectricity;
 					g += rec[i].gelectricity;
 					all += rec[i].electricity;
 					rate += rec[i].power_rate;
-					x++;
 					i++;
 				}
 				else
@@ -47,14 +45,14 @@ void displayCommunityByDate()
 					i++;
 				}
 			}
-			printf(" %-8d", rec[change].year);
-			printf("%-8d", rec[change].month);
+			printf(" %-8d", rec[n].year);
+			printf("%-8d", rec[n].month);
 			printf("%-16lf", f);
 			printf("%-16lf", g);
 			printf("%-16lf", all);
 			printf("%-16lf", rate);
 			printf("\n");
-			n = findCommunityname(rec, &com);
+			n = findCommunityname(rec, com);
 		}
 		n = change;
 		while (n <= count)
@@ -81,44 +79,41 @@ void displayCommunityByID()
 	if (change)
 	{
 		printf("$ 按户号显示小区电费记录信息 $\n");
-		printf(" 小区名：是否扩容：");
+		printf(" 小区名：是否扩容：\n");
 		printf("%-8s", rec[change].community);
 		printf("%-8d", rec[change].list);
 		printf("\n");
 		printf(" 户号:   户名：  峰时：          谷时：          总用电量：      电费：\n");
 		int n = change;
-		printf(" %-8s", rec[change].name);
-		printf("%-8d", rec[change].id);
-		while (n <= count)
+		while (n)
 		{
+			int i = n;
 			id = rec[n].id;
-			int x = 0;
 			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
-			while (n <= count)
+			while (i <= count)
 			{
-				if (rec[n].id == id)
+				if (id == rec[i].id && rec[i].count)
 				{
-					rec[n].count = 0;
-					f += rec[n].felectricity;
-					g += rec[n].gelectricity;
-					all += rec[n].electricity;
-					rate += rec[n].power_rate;
-					x++;
-					n++;
+					rec[i].count = 0;
+					f += rec[i].felectricity;
+					g += rec[i].gelectricity;
+					all += rec[i].electricity;
+					rate += rec[i].power_rate;
+					i++;
 				}
 				else
 				{
-					n++;
+					i++;
 				}
 			}
-			printf(" %-8s", rec[change].name);
-			printf("%-8d", rec[change].id);
+			printf("%-8d", rec[n].id);
+			printf(" %-8s", rec[n].name);
 			printf("%-16lf", f);
 			printf("%-16lf", g);
 			printf("%-16lf", all);
 			printf("%-16lf", rate);
 			printf("\n");
-			n = findCommunityname(rec, &com);
+			n = findCommunityname(rec, com);
 		}
 		n = change;
 		while (n <= count)
@@ -246,9 +241,10 @@ void editRecord()
 		scanf_s("%d", &rec[count].number);
 		printf(" 是否参加峰谷计费：");
 		scanf_s("%d", &rec[count].join);
-		if (findCommunityname(rec, rec[count].community))
+		int n = findCommunityname(rec, rec[count].community);
+		if (n)
 		{
-			rec[count].list = rec[change].list;
+			rec[count].list = rec[n].list;
 			printf(" 峰时电量：");
 			scanf_s("%lf", &rec[count].felectricity);
 			printf(" 谷时电量：");
@@ -430,6 +426,43 @@ void modifyjoin()
 	}
 }
 
+/*修改小区是否扩容*/
+void modifylist()
+{
+	char com[STR_LEN] = { 0 };
+	printf(" 输入小区名：");
+	scanf_s("%s", com, 50);
+	change = findCommunityname(rec, com);
+	int n = change;
+	if (change)
+	{
+		printf(" 小区名：是否扩容：\n");
+		printf("%-8s", rec[change].community);
+		printf("%-8d", rec[change].list);
+		printf("\n");
+		printf(" 是否扩容：");
+		scanf_s("%d", &rec[count].list);
+		while (n)
+		{
+			rec[n].list = rec[count].list;
+			rec[n].count = 0;
+			n = findCommunityname(rec, rec[n].community);
+		}
+		n = change;
+		while (n <= count)
+		{
+			rec[n].count = 1;
+			n++;
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到该小区\n");
+	}
+	change = 0;
+	id = 0;
+}
+
 /*更改峰时电量*/
 void changef()
 {
@@ -490,13 +523,13 @@ void findRecord()
 		printf("%-16lf", g);
 		printf("%-16lf", all);
 		printf("%-16lf", rate);
-		printf("%\n");
+		printf("\n");
 		printf("%-16s", "月均");
 		printf("%-16lf", (f / x));
 		printf("%-16lf", (g / x));
 		printf("%-16lf", (all / x));
 		printf("%-16lf", (rate / x));
-		printf("%\n");
+		printf("\n");
 	}
 	id = 0;
 }
@@ -516,7 +549,6 @@ int findRecordByID(Record* rec, int id)
 	return 0;
 }
 
-
 /*通过户号和日期查找住户选项*/
 int findRecordByIDdate(Record* rec, int id, int year, int month)
 {
@@ -532,18 +564,110 @@ int findRecordByIDdate(Record* rec, int id, int year, int month)
 	return 0;
 }
 
-
-
 /*已扩容小区名单*/
 void UnList()
 {
-
+	int n = 1;
+	int i = 1;
+	if (findlist())
+	{
+		while (n <= count)
+		{
+			if (findCommunityname(rec, rec[n].community) && rec[n].list)
+			{
+				printf("%-8s\n", rec[n].community);
+				i = n;
+				while (i)
+				{
+					i = findCommunityname(rec, rec[n].community);
+					rec[i].count = 0;
+				}
+				n++;
+			}
+			else
+			{
+				n++;
+			}
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到已扩容小区\n");
+	}
+	n = 0;
+	while (n <= count)
+	{
+		rec[n].count = 1;
+		n++;
+	}
 }
 
 /*未扩容小区名单*/
 void List()
 {
+	int n = 1;
+	int i = 1;
+	if (findunlist())
+	{
+		while (n <= count)
+		{
+			if (findCommunityname(rec, rec[n].community) && rec[n].list==0)
+			{
+				printf("%-8s\n", rec[n].community);
+				i = n;
+				while (i)
+				{
+					i = findCommunityname(rec, rec[n].community);
+					rec[i].count = 0;
+				}
+				n++;
+			}
+			else
+			{
+				n++;
+			}
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到未扩容小区\n");
+	}
+	n = 1;
+	while (n <= count)
+	{
+		rec[n].count = 1;
+		n++;
+	}
+}
 
+/*查找是否有小区扩容*/
+int findlist()
+{
+	int i = 1;
+	while (i <= count)
+	{
+		if (rec[i].list == 1)
+		{
+			return i;
+		}
+		i++;
+	}
+	return 0;
+}
+
+/*查找是否有小区未扩容*/
+int findunlist()
+{
+	int i = 1;
+	while (i <= count)
+	{
+		if (rec[i].list == 0)
+		{
+			return i;
+		}
+		i++;
+	}
+	return 0;
 }
 
 /*急需扩容小区名单*/
@@ -567,7 +691,7 @@ double rate(double felectricity, double gelectricity, double electricity, int nu
 	{
 	case 1:
 		return fgrate(felectricity, gelectricity, electricity, number);
-	case 2:
+	case 0:
 		return unfgrate(electricity, number);
 	}
 	return 0;

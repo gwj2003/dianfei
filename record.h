@@ -11,7 +11,7 @@ void displayCommunityByDate();
 void displayCommunityByID();
 
 /*通过小区名查找*/
-int findCommunityname(Record* rec,char com);
+int findCommunityname(Record* rec,char* com);
 
 /*显示相同住户标题*/
 void displaysameTitle();
@@ -46,6 +46,9 @@ void modifynumber();
 /*修改是否参加峰谷计费*/
 void modifyjoin();
 
+/*修改小区是否扩容*/
+void modifylist();
+
 /*更改峰时电量*/
 void changef();
 
@@ -61,15 +64,17 @@ int findRecordByID(Record* p, int id);
 /*通过户号和日期查找住户选项*/
 int findRecordByIDdate(Record* p, int id,int year,int month);
 
-
-
-
-
 /*已扩容小区名单*/
 void UnList();
 
 /*未扩容小区名单*/
 void List();
+
+/*查找是否有小区扩容*/
+int findlist();
+
+/*查找是否有小区未扩容*/
+int findunlist();
 
 /*急需扩容小区名单*/
 void need();

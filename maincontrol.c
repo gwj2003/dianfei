@@ -4,8 +4,8 @@
 #include"menu.h"
 #include"record.h"
 
-int count = 0;                 /*用于计算记录条数*/
-int change = 0;                /*用于在更改记录时确定地址*/
+int count = 0;                   /*用于计算记录条数*/
+int change = 0;                  /*用于在更改记录时确定地址*/
 int id = 0;                      /*用于在更改记录时确定户号*/
 
 /*选择按小区查询电费记录信息功能*/
@@ -57,7 +57,7 @@ void runstatistician(int choice)
 		break;
 	case 3:removeRecord();                /*选择删除住户电费记录信息功能*/
 		break;
-	case 4:modify();                     /*选择修改住户电费记录信息功能*/
+	case 4:modify();                      /*选择修改住户电费记录信息功能*/
 		break;
 	}
 }
@@ -77,6 +77,9 @@ void runmodify(int choice)
 		printf(" 修改成功");
 		break;
 	case 4:modifyjoin();                  /*修改是否参加峰谷计费*/
+		printf(" 修改成功");
+		break;
+	case 5:modifylist();                  /*修改小区是否扩容*/
 		printf(" 修改成功");
 		break;
 	}
