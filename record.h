@@ -25,6 +25,9 @@ void displaysame(int n);
 /*显示不重复住户信息*/
 void displaydifferent(int n);
 
+/*输入年月峰谷信息*/
+void ynfg();
+
 /*编辑住户信息*/
 void editRecord();
 
