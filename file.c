@@ -9,13 +9,12 @@ extern int count;
 int readRecordFile(Record* rec)
 {
 	FILE* fp;
-	int i = 0;
+	int i = 1;
 	fopen_s(&fp, "record.txt", "r");
 	if (fp)
 	{
 		while (!feof(fp))
 		{
-			i++;
 			fscanf_s(fp, "%d ", &rec[i].id);
 			fscanf_s(fp, "%s ", rec[i].name, STR_LEN);
 			fscanf_s(fp, "%s ", rec[i].community, STR_LEN);
@@ -29,9 +28,10 @@ int readRecordFile(Record* rec)
 			fscanf_s(fp, "%lf ", &rec[i].electricity);
 			fscanf_s(fp, "%lf ", &rec[i].power_rate);
 			fscanf_s(fp, "%d ", &rec[i].count);
+			i++;
 		}
 		fclose(fp);
-		return i;
+		return --i;
 	}
 	else
 	{

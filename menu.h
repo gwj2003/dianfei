@@ -3,8 +3,6 @@
 
 #include "maincontrol.h"
 
-
-
 /*主菜单*/
 void menuMain();
 
@@ -18,7 +16,7 @@ void modify();
 void staff();
 
 /*询问要修改什么*/
-void ask();
+void askfg();
 
 /*选择查询电费记录信息功能*/
 void find();

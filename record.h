@@ -4,15 +4,6 @@
 #include "maincontrol.h"
 #include "file.h"
 
-/*按日期显示小区信息*/
-void displayCommunityByDate();
-
-/*按户号显示小区信息*/
-void displayCommunityByID();
-
-/*通过小区名查找*/
-int findCommunityname(Record* rec,char* com);
-
 /*显示相同住户标题*/
 void displaysameTitle();
 
@@ -25,11 +16,29 @@ void displaysame(int n);
 /*显示不重复住户信息*/
 void displaydifferent(int n);
 
+/*按日期显示小区信息*/
+void displayCommunityByDate();
+
+/*按户号显示小区信息*/
+void displayCommunityByID();
+
+/*显示已扩容小区名单*/
+void displayUnList();
+
+/*显示未扩容小区名单*/
+void displayList();
+
+/*显示急需扩容小区名单*/
+void displayneed();
+
+/*显示不急需扩容小区名单*/
+void displayunneeded();
+
 /*输入年月峰谷信息*/
 void ynfg();
 
-/*编辑住户信息*/
-void editRecord();
+/*重置count信息*/
+void resetcount();
 
 /*添加住户选项*/
 void addRecord();
@@ -67,26 +76,14 @@ int findRecordByID(Record* p, int id);
 /*通过户号和日期查找住户选项*/
 int findRecordByIDdate(Record* p, int id,int year,int month);
 
-/*已扩容小区名单*/
-void UnList();
-
-/*未扩容小区名单*/
-void List();
+/*通过小区名查找*/
+int findCommunityname(Record* rec, char* com);
 
 /*查找是否有小区扩容*/
 int findlist();
 
 /*查找是否有小区未扩容*/
 int findunlist();
-
-/*急需扩容小区名单*/
-void need();
-
-/*不急需扩容小区名单*/
-void unneeded();
-
-
-
 
 /*计算总电费*/
 double rate(double felectricity, double gelectricity, double electricity, int number, int join);

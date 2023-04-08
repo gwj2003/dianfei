@@ -113,7 +113,7 @@ void staff()
 }
 
 /*询问要修改什么*/
-void ask()
+void askfg()
 {
 	int choice;
 	do

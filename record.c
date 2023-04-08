@@ -9,142 +9,6 @@ extern int count;
 extern int change;
 extern int id;
 
-/*按日期显示小区信息*/;
-void displayCommunityByDate()
-{
-	char com[STR_LEN] = { 0 };
-	printf(" 输入小区名：");
-	scanf_s("%s", com, 50);
-	change = findCommunityname(rec, com);
-	if (change)
-	{
-		printf("$ 按日期显示小区电费记录信息 $\n");
-		printf(" 小区名：是否扩容：\n");
-		printf("%-8s", rec[change].community);
-		printf("%-8d", rec[change].list);
-		printf("\n");
-		printf(" 年份:   月份：  峰时：          谷时：          总用电量：      电费：\n");
-		int n = change;
-		while (n)
-		{
-			int i = n;
-			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
-			while (i <= count)
-			{
-				if ((strcmp(rec[i].community, com) == 0) && rec[n].year == rec[i].year && rec[n].month == rec[i].month)
-				{
-					rec[i].count = 0;
-					f += rec[i].felectricity;
-					g += rec[i].gelectricity;
-					all += rec[i].electricity;
-					rate += rec[i].power_rate;
-					i++;
-				}
-				else
-				{
-					i++;
-				}
-			}
-			printf(" %-8d", rec[n].year);
-			printf("%-8d", rec[n].month);
-			printf("%-16lf", f);
-			printf("%-16lf", g);
-			printf("%-16lf", all);
-			printf("%-16lf", rate);
-			printf("\n");
-			n = findCommunityname(rec, com);
-		}
-		n = change;
-		while (n <= count)
-		{
-			rec[n].count = 1;
-			n++;
-		}
-	}
-	else
-	{
-		printf("住户信息中未找到该小区\n");
-	}
-	change = 0;
-	id = 0;
-}
-
-/*按户号显示小区信息*/
-void displayCommunityByID()
-{
-	char com[STR_LEN] = { 0 };
-	printf(" 输入小区名：");
-	scanf_s("%s", com, 50);
-	change = findCommunityname(rec, com);
-	if (change)
-	{
-		printf("$ 按户号显示小区电费记录信息 $\n");
-		printf(" 小区名：是否扩容：\n");
-		printf("%-8s", rec[change].community);
-		printf("%-8d", rec[change].list);
-		printf("\n");
-		printf(" 户号:   户名：  峰时：          谷时：          总用电量：      电费：\n");
-		int n = change;
-		while (n)
-		{
-			int i = n;
-			id = rec[n].id;
-			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
-			while (i <= count)
-			{
-				if (id == rec[i].id && rec[i].count)
-				{
-					rec[i].count = 0;
-					f += rec[i].felectricity;
-					g += rec[i].gelectricity;
-					all += rec[i].electricity;
-					rate += rec[i].power_rate;
-					i++;
-				}
-				else
-				{
-					i++;
-				}
-			}
-			printf("%-8d", rec[n].id);
-			printf(" %-8s", rec[n].name);
-			printf("%-16lf", f);
-			printf("%-16lf", g);
-			printf("%-16lf", all);
-			printf("%-16lf", rate);
-			printf("\n");
-			n = findCommunityname(rec, com);
-		}
-		n = change;
-		while (n <= count)
-		{
-			rec[n].count = 1;
-			n++;
-		}
-	}
-	else
-	{
-		printf("住户信息中未找到该小区\n");
-	}
-	change = 0;
-	id = 0;
-}
-
-/*通过小区名查找*/
-int findCommunityname(Record* rec, char* com)
-{
-	int i = 1;
-	while (i <= count)
-	{
-		if ((strcmp(rec[i].community, com) == 0) && rec[i].count)
-		{
-			return i;
-		}
-		i++;
-	}
-	return 0;
-}
-
 /*显示相同住户标题*/
 void displaysameTitle()
 {
@@ -193,6 +57,309 @@ void displaydifferent(int n)
 	printf("\n");
 }
 
+/*按日期显示小区信息*/;
+void displayCommunityByDate()
+{
+	char com[STR_LEN] = { 0 };
+	printf(" 输入小区名：");
+	scanf_s("%s", com, 50);
+	change = findCommunityname(rec, com);
+	if (change)
+	{
+		printf("$ 按日期显示小区电费记录信息 $\n");
+		printf(" 小区名：是否扩容：\n");
+		printf(" %-8s", rec[change].community);
+		printf("%-8d", rec[change].list);
+		printf("\n");
+		printf(" 年份:   月份：  峰时：          谷时：          总用电量：      电费：\n");
+		int n = change;
+		while (n)
+		{
+			int i = n;
+			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
+			while (i < count)
+			{
+				if ((strcmp(rec[i].community, com) == 0) && rec[n].year == rec[i].year && rec[n].month == rec[i].month)
+				{
+					rec[i].count = 0;
+					f += rec[i].felectricity;
+					g += rec[i].gelectricity;
+					all += rec[i].electricity;
+					rate += rec[i].power_rate;
+					i++;
+				}
+				else
+				{
+					i++;
+				}
+			}
+			printf(" %-8d", rec[n].year);
+			printf("%-8d", rec[n].month);
+			printf("%-16lf", f);
+			printf("%-16lf", g);
+			printf("%-16lf", all);
+			printf("%-16lf", rate);
+			printf("\n");
+			n = findCommunityname(rec, com);
+		}
+		resetcount();
+	}
+	else
+	{
+		printf("住户信息中未找到该小区\n");
+	}
+	change = 0;
+	id = 0;
+}
+
+/*按户号显示小区信息*/
+void displayCommunityByID()
+{
+	char com[STR_LEN] = { 0 };
+	printf(" 输入小区名：");
+	scanf_s("%s", com, 50);
+	change = findCommunityname(rec, com);
+	if (change)
+	{
+		printf("$ 按户号显示小区电费记录信息 $\n");
+		printf(" 小区名：是否扩容：\n");
+		printf(" %-8s", rec[change].community);
+		printf("%-8d", rec[change].list);
+		printf("\n");
+		printf(" 户号:   户名：  峰时：          谷时：          总用电量：      电费：\n");
+		int n = change;
+		while (n)
+		{
+			int i = n;
+			id = rec[n].id;
+			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
+			while (i < count)
+			{
+				if (id == rec[i].id && rec[i].count)
+				{
+					rec[i].count = 0;
+					f += rec[i].felectricity;
+					g += rec[i].gelectricity;
+					all += rec[i].electricity;
+					rate += rec[i].power_rate;
+					i++;
+				}
+				else
+				{
+					i++;
+				}
+			}
+			printf(" %-8d", rec[n].id);
+			printf("%-8s", rec[n].name);
+			printf("%-16lf", f);
+			printf("%-16lf", g);
+			printf("%-16lf", all);
+			printf("%-16lf", rate);
+			printf("\n");
+			n = findCommunityname(rec, com);
+		}
+		resetcount();
+	}
+	else
+	{
+		printf("住户信息中未找到该小区\n");
+	}
+	change = 0;
+	id = 0;
+}
+
+/*显示已扩容小区名单*/
+void displayUnList()
+{
+	int n = 1;
+	int i = 1;
+	if (findlist())
+	{
+		printf("已扩容小区名单：\n");
+		while (n < count)
+		{
+			if (findCommunityname(rec, rec[n].community) && rec[n].list)
+			{
+				printf("%-8s\n", rec[n].community);
+				i = n;
+				while (i)
+				{
+					i = findCommunityname(rec, rec[n].community);
+					rec[i].count = 0;
+				}
+				n++;
+			}
+			else
+			{
+				n++;
+			}
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到已扩容小区\n");
+	}
+	resetcount();
+}
+
+/*显示未扩容小区名单*/
+void displayList()
+{
+	int n = 1;
+	int i = 1;
+	if (findunlist())
+	{
+		printf("未扩容小区名单：\n");
+		while (n < count)
+		{
+			if (findCommunityname(rec, rec[n].community) && rec[n].list == 0)
+			{
+				printf("%-8s\n", rec[n].community);
+				i = n;
+				while (i)
+				{
+					i = findCommunityname(rec, rec[n].community);
+					rec[i].count = 0;
+				}
+				n++;
+			}
+			else
+			{
+				n++;
+			}
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到未扩容小区\n");
+	}
+	resetcount();
+}
+
+/*显示急需扩容小区名单*/
+void displayneed()
+{
+	int i = 1;
+	double a = 0.0;/*统计小区月均超300度人数*/
+	double b = 0.0;/*统计小区人数*/
+	double x = 0.0;/*统计某户记录月份数*/
+	int n = findunlist();
+	int c = n;
+	if (n)
+	{
+		printf("不急需扩容小区名单：\n");
+		while (n)
+		{
+			while (c)
+			{
+				double all = 0.0;
+				i = c;
+				id = rec[c].id;
+				while (i < count)
+				{
+					if (id == rec[i].id && rec[i].count)
+					{
+						rec[i].count = 0;
+						all += rec[i].electricity;
+						i++;
+						x++;
+					}
+					else
+					{
+						i++;
+					}
+				}
+				if ((all / x) >= 300)
+				{
+					a++;
+					b++;
+				}
+				else
+				{
+					b++;
+				}
+				c = findCommunityname(rec, rec[n].community);
+			}
+			if ((a / b) > 0.5)
+			{
+				printf("%-8s\n", rec[n].community);
+			}
+			a = 0.0;
+			b = 0.0;
+			x = 0.0;
+			n = findunlist();
+			c = findCommunityname(rec, rec[n].community);
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到未扩容小区\n");
+	}
+	resetcount();
+}
+
+/*显示不急需扩容小区名单*/
+void displayunneeded()
+{
+	int i = 1;
+	double a = 0.0;/*统计小区月均超300度人数*/
+	double b = 0.0;/*统计小区人数*/
+	double x = 0.0;/*统计某户记录月份数*/
+	int n = findunlist();
+	int c = n;
+	if (n)
+	{
+		printf("不急需扩容小区名单：\n");
+		while (n)
+		{
+			while (c)
+			{
+				double all = 0.0;
+				i = c;
+				id = rec[c].id;
+				while (i < count)
+				{
+					if (id == rec[i].id && rec[i].count)
+					{
+						rec[i].count = 0;
+						all += rec[i].electricity;
+						i++;
+						x++;
+					}
+					else
+					{
+						i++;
+					}
+				}
+				if ((all / x) >= 300)
+				{
+					a++;
+					b++;
+				}
+				else
+				{
+					b++;
+				}
+				c = findCommunityname(rec, rec[n].community);
+			}
+			if ((a / b) <= 0.5)
+			{
+				printf("%-8s\n", rec[n].community);
+			}
+			a = 0.0;
+			b = 0.0;
+			x = 0.0;
+			n = findunlist();
+			c = findCommunityname(rec, rec[n].community);
+		}
+	}
+	else
+	{
+		printf("住户信息中未找到未扩容小区\n");
+	}
+	resetcount();
+}
+
 /*输入年月峰谷信息*/
 void ynfg()
 {
@@ -207,17 +374,26 @@ void ynfg()
 	rec[count].count = 1;
 }
 
-/*编辑住户信息*/
-void editRecord()
+/*重置count信息*/
+void resetcount()
 {
-	int id;
+	int i = 0;
+	while (i < count)
+	{
+		rec[i].count = 1;
+		i++;
+	}
+}
+
+/*添加住户选项*/
+void addRecord()
+{
+	printf("$ 添加住户信息 $\n");
+	count++;
 	printf("$ 录入住户信息 $\n");
 	printf(" 户号：");
-	scanf_s("%d", &rec[count].id);                 /*先输入下一行的户号*/
-	id = rec[count].id;                            /*赋值给id*/
-	rec[count].id = 0;
-	change = findRecordByID(rec, id);              /*寻找是否已有相同的户号*/
-	rec[count].id = id;
+	scanf_s("%d", &rec[count].id);                 /*先输入下一行的户号*/                     
+	change = findRecordByID(rec, rec[count].id);   /*寻找是否已有相同的户号*/
 	if (change)
 	{
 		printf(" 已有该用户信息：\n");             /*输出相同的信息*/
@@ -259,14 +435,6 @@ void editRecord()
 			rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 		}
 	}
-}
-
-/*添加住户选项*/
-void addRecord()
-{
-	printf("$ 添加住户信息 $\n");
-	count++;
-	editRecord(rec);
 	printf("\n成功添加住户！\n");
 }
 
@@ -319,7 +487,7 @@ void modifyRecord()
 		displaysame(change);
 		displaydifferentTitle();
 		displaydifferent(change);
-		ask();
+		askfg();
 		change = 0;
 	}
 	else
@@ -327,8 +495,6 @@ void modifyRecord()
 		printf("住户信息中未找到该住户\n");
 	}
 }
-
-
 
 /*修改小区名*/
 void modifyname()
@@ -344,7 +510,7 @@ void modifyname()
 	{
 		printf(" 请输入小区名：");
 		int i = change;
-		while (i <= count)
+		while (i < count)
 		{
 			if (rec[i].id == id)
 			{
@@ -373,17 +539,17 @@ void modifynumber()
 	{
 		printf(" 请输入住户人数：");
 		scanf_s("%d", &rec[change].number);
-		int add = change;
-		while (add <= count)
+		int i = change;
+		while (i < count)
 		{
-			if (rec[add].id == id)
+			if (rec[i].id == id)
 			{
-				rec[add].power_rate = rate(rec[add].felectricity, rec[add].gelectricity, rec[add].electricity, rec[change].number, rec[add].join);
-				add++;
+				rec[i].power_rate = rate(rec[i].felectricity, rec[i].gelectricity, rec[i].electricity, rec[change].number, rec[i].join);
+				i++;
 			}
 			else
 			{
-				add++;
+				i++;
 			}
 		}
 	}
@@ -403,17 +569,17 @@ void modifyjoin()
 	{
 		printf(" 是否参加峰谷计费：");
 		scanf_s("%d", &rec[change].join);
-		int add = change;
-		while (add <= count)
+		int i = change;
+		while (i < count)
 		{
-			if (rec[add].id == id)
+			if (rec[i].id == id)
 			{
-				rec[add].power_rate = rate(rec[add].felectricity, rec[add].gelectricity, rec[add].electricity, rec[add].number, rec[change].join);
-				add++;
+				rec[i].power_rate = rate(rec[i].felectricity, rec[i].gelectricity, rec[i].electricity, rec[i].number, rec[change].join);
+				i++;
 			}
 			else
 			{
-				add++;
+				i++;
 			}
 		}
 	}
@@ -442,7 +608,7 @@ void modifylist()
 			n = findCommunityname(rec, rec[n].community);
 		}
 		n = change;
-		while (n <= count)
+		while (n < count)
 		{
 			rec[n].count = 1;
 			n++;
@@ -482,8 +648,8 @@ void findRecord()
 	printf(" 输入户号：");
 	scanf_s("%d", &id);
 	int n = findRecordByID(rec, id);
-	int add = n;
-	if (!add)
+	int i = n;
+	if (!i)
 	{
 		printf("住户信息中未找到该住户\n");
 	}
@@ -493,21 +659,21 @@ void findRecord()
 		displaysameTitle();
 		displaysame(n);
 		displaydifferentTitle();
-		while (add <= count)
+		while (i < count)
 		{
-			if (rec[add].id == id)
+			if (rec[i].id == id)
 			{
-				displaydifferent(add);
-				f += rec[add].felectricity;
-				g += rec[add].gelectricity;
-				all += rec[add].electricity;
-				rate += rec[add].power_rate;
+				displaydifferent(i);
+				f += rec[i].felectricity;
+				g += rec[i].gelectricity;
+				all += rec[i].electricity;
+				rate += rec[i].power_rate;
 				x++;
-				add++;
+				i++;
 			}
 			else
 			{
-				add++;
+				i++;
 			}
 		}
 		printf("%-16s", "总");
@@ -529,8 +695,8 @@ void findRecord()
 /*通过户号查找住户选项*/
 int findRecordByID(Record* rec, int id)
 {
-	int i = 0;
-	while (i <= count)
+	int i = 1;
+	while (i < count)
 	{
 		if (rec[i].id == id)
 		{
@@ -545,7 +711,7 @@ int findRecordByID(Record* rec, int id)
 int findRecordByIDdate(Record* rec, int id, int year, int month)
 {
 	int i = 0;
-	while (i <= count)
+	while (i < count)
 	{
 		if ((rec[i].id == id) && (rec[i].year == year) && (rec[i].month == month))   /*两个条件同时满足*/
 		{
@@ -556,89 +722,26 @@ int findRecordByIDdate(Record* rec, int id, int year, int month)
 	return 0;
 }
 
-/*已扩容小区名单*/
-void UnList()
+/*通过小区名查找*/
+int findCommunityname(Record* rec, char* com)
 {
-	int n = 1;
 	int i = 1;
-	if (findlist())
+	while (i < count)
 	{
-		printf("已扩容小区名单：\n");
-		while (n <= count)
+		if ((strcmp(rec[i].community, com) == 0) && rec[i].count)
 		{
-			if (findCommunityname(rec, rec[n].community) && rec[n].list)
-			{
-				printf("%-8s\n", rec[n].community);
-				i = n;
-				while (i)
-				{
-					i = findCommunityname(rec, rec[n].community);
-					rec[i].count = 0;
-				}
-				n++;
-			}
-			else
-			{
-				n++;
-			}
+			return i;
 		}
+		i++;
 	}
-	else
-	{
-		printf("住户信息中未找到已扩容小区\n");
-	}
-	n = 0;
-	while (n <= count)
-	{
-		rec[n].count = 1;
-		n++;
-	}
-}
-
-/*未扩容小区名单*/
-void List()
-{
-	int n = 1;
-	int i = 1;
-	if (findunlist())
-	{
-		printf("未扩容小区名单：\n");
-		while (n <= count)
-		{
-			if (findCommunityname(rec, rec[n].community) && rec[n].list == 0)
-			{
-				printf("%-8s\n", rec[n].community);
-				i = n;
-				while (i)
-				{
-					i = findCommunityname(rec, rec[n].community);
-					rec[i].count = 0;
-				}
-				n++;
-			}
-			else
-			{
-				n++;
-			}
-		}
-	}
-	else
-	{
-		printf("住户信息中未找到未扩容小区\n");
-	}
-	n = 1;
-	while (n <= count)
-	{
-		rec[n].count = 1;
-		n++;
-	}
+	return 0;
 }
 
 /*查找是否有小区扩容*/
 int findlist()
 {
 	int i = 1;
-	while (i <= count)
+	while (i < count)
 	{
 		if (rec[i].list == 1 && rec[i].count)
 		{
@@ -653,7 +756,7 @@ int findlist()
 int findunlist()
 {
 	int i = 1;
-	while (i <= count)
+	while (i < count)
 	{
 		if (rec[i].list == 0 && rec[i].count)
 		{
@@ -663,142 +766,6 @@ int findunlist()
 	}
 	return 0;
 }
-
-/*急需扩容小区名单*/
-void need()
-{
-	int i = 1;
-	double a = 0.0;/*统计小区月均超300度人数*/
-	double b = 0.0;/*统计小区人数*/
-	double x = 0.0;/*统计某户记录月份数*/
-	int n = findunlist();
-	int c = n;
-	if (n)
-	{
-		printf("不急需扩容小区名单：\n");
-		while (n)
-		{
-			while (c)
-			{
-				double all = 0.0;
-				i = c;
-				id = rec[c].id;
-				while (i <= count)
-				{
-					if (id == rec[i].id && rec[i].count)
-					{
-						rec[i].count = 0;
-						all += rec[i].electricity;
-						i++;
-						x++;
-					}
-					else
-					{
-						i++;
-					}
-				}
-				if ((all / x) >= 300)
-				{
-					a++;
-					b++;
-				}
-				else
-				{
-					b++;
-				}
-				c = findCommunityname(rec, rec[n].community);
-			}
-			if ((a / b) > 0.5)
-			{
-				printf("%-8s\n", rec[n].community);
-			}
-			a = 0.0;
-			b = 0.0;
-			x = 0.0;
-			n = findunlist();
-			c = findCommunityname(rec, rec[n].community);
-		}
-	}
-	else
-	{
-		printf("住户信息中未找到未扩容小区\n");
-	}
-	n = 1;
-	while (n <= count)
-	{
-		rec[n].count = 1;
-		n++;
-	}
-}
-
-/*不急需扩容小区名单*/
-void unneeded()
-{
-	int i = 1;
-	double a = 0.0;/*统计小区月均超300度人数*/
-	double b = 0.0;/*统计小区人数*/
-	double x = 0.0;/*统计某户记录月份数*/
-	int n = findunlist();
-	int c = n;
-	if (n)
-	{
-		printf("不急需扩容小区名单：\n");
-		while (n)
-		{
-			while (c)
-			{
-				double all = 0.0;
-				i = c;
-				id = rec[c].id;
-				while (i <= count)
-				{
-					if (id == rec[i].id && rec[i].count)
-					{
-						rec[i].count = 0;
-						all += rec[i].electricity;
-						i++;
-						x++;
-					}
-					else
-					{
-						i++;
-					}
-				}
-				if ((all / x) >= 300)
-				{
-					a++;
-					b++;
-				}
-				else
-				{
-					b++;
-				}
-				c = findCommunityname(rec, rec[n].community);
-			}
-			if ((a / b) <= 0.5)
-			{
-				printf("%-8s\n", rec[n].community);
-			}
-			a = 0.0;
-			b = 0.0;
-			x = 0.0;
-			n = findunlist();
-			c = findCommunityname(rec, rec[n].community);
-		}
-	}
-	else
-	{
-		printf("住户信息中未找到未扩容小区\n");
-	}
-	n = 1;
-	while (n <= count)
-	{
-		rec[n].count = 1;
-		n++;
-	}
-}
-
-
 
 /*计算总电费*/
 double rate(double felectricity, double gelectricity, double electricity, int number, int join)

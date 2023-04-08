@@ -114,13 +114,13 @@ void runexpansion(int choice)
 {
 	switch (choice)
 	{
-	case 1:UnList();                   /*选择已扩容小区名单*/
+	case 1:displayUnList();                   /*选择已扩容小区名单*/
 		break;
-	case 2:List();                     /*选择未扩容小区名单*/
+	case 2:displayList();                     /*选择未扩容小区名单*/
 		break;
-	case 3:need();                     /*选择急需扩容小区名单*/
+	case 3:displayneed();                     /*选择急需扩容小区名单*/
 		break;
-	case 4:unneeded();                 /*选择不急需扩容小区名单*/
+	case 4:displayunneeded();                 /*选择不急需扩容小区名单*/
 		break;
 	}
 }
