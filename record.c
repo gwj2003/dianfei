@@ -77,7 +77,7 @@ void displayCommunityByDate()
 		{
 			int i = n;
 			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
-			while (i < count)
+			while (i <= count)
 			{
 				if ((strcmp(rec[i].community, com) == 0) && rec[n].year == rec[i].year && rec[n].month == rec[i].month)
 				{
@@ -133,7 +133,7 @@ void displayCommunityByID()
 			int i = n;
 			id = rec[n].id;
 			double f = 0.0, g = 0.0, all = 0.0, rate = 0.0;
-			while (i < count)
+			while (i <= count)
 			{
 				if (id == rec[i].id && rec[i].count)
 				{
@@ -176,7 +176,7 @@ void displayUnList()
 	if (findlist())
 	{
 		printf("已扩容小区名单：\n");
-		while (n < count)
+		while (n <=count)
 		{
 			if (findCommunityname(rec, rec[n].community) && rec[n].list)
 			{
@@ -210,7 +210,7 @@ void displayList()
 	if (findunlist())
 	{
 		printf("未扩容小区名单：\n");
-		while (n < count)
+		while (n <=count)
 		{
 			if (findCommunityname(rec, rec[n].community) && rec[n].list == 0)
 			{
@@ -255,7 +255,7 @@ void displayneed()
 				double all = 0.0;
 				i = c;
 				id = rec[c].id;
-				while (i < count)
+				while (i <= count)
 				{
 					if (id == rec[i].id && rec[i].count)
 					{
@@ -317,7 +317,7 @@ void displayunneeded()
 				double all = 0.0;
 				i = c;
 				id = rec[c].id;
-				while (i < count)
+				while (i <= count)
 				{
 					if (id == rec[i].id && rec[i].count)
 					{
@@ -378,7 +378,7 @@ void ynfg()
 void resetcount()
 {
 	int i = 0;
-	while (i < count)
+	while (i <= count)
 	{
 		rec[i].count = 1;
 		i++;
@@ -510,7 +510,7 @@ void modifyname()
 	{
 		printf(" 请输入小区名：");
 		int i = change;
-		while (i < count)
+		while (i <= count)
 		{
 			if (rec[i].id == id)
 			{
@@ -540,7 +540,7 @@ void modifynumber()
 		printf(" 请输入住户人数：");
 		scanf_s("%d", &rec[change].number);
 		int i = change;
-		while (i < count)
+		while (i <= count)
 		{
 			if (rec[i].id == id)
 			{
@@ -570,7 +570,7 @@ void modifyjoin()
 		printf(" 是否参加峰谷计费：");
 		scanf_s("%d", &rec[change].join);
 		int i = change;
-		while (i < count)
+		while (i <= count)
 		{
 			if (rec[i].id == id)
 			{
@@ -659,7 +659,7 @@ void findRecord()
 		displaysameTitle();
 		displaysame(n);
 		displaydifferentTitle();
-		while (i < count)
+		while (i <= count)
 		{
 			if (rec[i].id == id)
 			{
@@ -696,7 +696,7 @@ void findRecord()
 int findRecordByID(Record* rec, int id)
 {
 	int i = 1;
-	while (i < count)
+	while (i <= count)
 	{
 		if (rec[i].id == id)
 		{
@@ -711,7 +711,7 @@ int findRecordByID(Record* rec, int id)
 int findRecordByIDdate(Record* rec, int id, int year, int month)
 {
 	int i = 0;
-	while (i < count)
+	while (i <= count)
 	{
 		if ((rec[i].id == id) && (rec[i].year == year) && (rec[i].month == month))   /*两个条件同时满足*/
 		{
@@ -726,7 +726,7 @@ int findRecordByIDdate(Record* rec, int id, int year, int month)
 int findCommunityname(Record* rec, char* com)
 {
 	int i = 1;
-	while (i < count)
+	while (i <= count)
 	{
 		if ((strcmp(rec[i].community, com) == 0) && rec[i].count)
 		{
@@ -741,7 +741,7 @@ int findCommunityname(Record* rec, char* com)
 int findlist()
 {
 	int i = 1;
-	while (i < count)
+	while (i <= count)
 	{
 		if (rec[i].list == 1 && rec[i].count)
 		{
@@ -756,7 +756,7 @@ int findlist()
 int findunlist()
 {
 	int i = 1;
-	while (i < count)
+	while (i <= count)
 	{
 		if (rec[i].list == 0 && rec[i].count)
 		{
