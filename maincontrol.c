@@ -44,7 +44,7 @@ void runmenuMain(int choice)
 	switch (choice)
 	{
 	case 1:
-		statistician();                 /*选择了记录人员的身份*/
+		statistician();                 /*选择了统计人员的身份*/
 		break;
 	case 2:
 		staff();                        /*选择了工作人员的身份*/

@@ -82,6 +82,9 @@ int findRecordByIDdate(Record* p, int id,int year,int month);
 /*通过小区名查找*/
 int findCommunityname(Record* rec, char* com);
 
+/*通过小区名查找已有*/
+int findCommunityByname(Record* rec, char* com);
+
 /*查找是否有小区扩容*/
 int findlist();
 

@@ -20,7 +20,7 @@ void runmodify(int choice);
 void runstaff(int choice);
 
 /*选择修改功能*/
-void  runchange(int choice);
+void runchange(int choice);
 
 /*选择扩容管理功能*/
 void runexpansion(int choice);

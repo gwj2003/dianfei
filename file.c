@@ -35,7 +35,7 @@ int readRecordFile(Record* rec)
 	}
 	else
 	{
-		printf("读文件失败！\n");                /*若打开失败，输出提示信息*/
+		printf("          读文件失败！\n");                /*若打开失败，输出提示信息*/
 		return 0;
 	}
 }
@@ -68,7 +68,7 @@ void saveFile(Record* rec, int count)
 	}
 	else
 	{
-		printf("读文件失败！\n");              /*若打开失败，输出提示信息*/
+		printf("          读文件失败！\n");              /*若打开失败，输出提示信息*/
 		exit(0);                               
 		fclose(fp);                            /*关闭文件*/
 	}
