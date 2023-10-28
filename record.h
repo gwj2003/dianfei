@@ -70,6 +70,9 @@ void changeg();
 /*查找住户选项*/
 void findRecord();
 
+/*通过户号查找已有住户选项*/
+int findRecordID(Record* p, int id);
+
 /*通过户号查找住户选项*/
 int findRecordByID(Record* p, int id);
 

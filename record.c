@@ -16,8 +16,8 @@ void displaysameTitle()
 	printf("%-8s", "户名");
 	printf("%-8s", "小区");
 	printf("%-8s", "人数");
-	printf("%-8s", "是否参与");
-	printf("%-8s", "是否扩容");
+	printf("%-16s", "是否参与峰谷计价");
+	printf("%-16s", "该小区是否已扩容");
 	printf("\n");
 }
 
@@ -36,12 +36,12 @@ void displaydifferentTitle()
 /*显示重复住户信息*/
 void displaysame(int n)
 {
-	printf("%-8d", rec[n].id);
+	printf("%08d", rec[n].id);
 	printf("%-8s", rec[n].name);
 	printf("%-8s", rec[n].community);
 	printf("%-8d", rec[n].number);
-	printf("%-8d", rec[n].join);
-	printf("%-8d", rec[n].list);
+	printf("%-16d", rec[n].join);
+	printf("%-16d", rec[n].list);
 	printf("\n");
 }
 
@@ -66,7 +66,8 @@ void displayCommunityByDate()
 	change = findCommunityname(rec, com);
 	if (change)
 	{
-		printf("$ 按日期显示小区电费记录信息 $\n");
+		printf(" 按日期显示小区电费记录信息\n");
+		printf(" 1为已扩容，0为未扩容\n");
 		printf(" 小区名：是否扩容：\n");
 		printf(" %-8s", rec[change].community);
 		printf("%-8d", rec[change].list);
@@ -121,7 +122,8 @@ void displayCommunityByID()
 	change = findCommunityname(rec, com);
 	if (change)
 	{
-		printf("$ 按户号显示小区电费记录信息 $\n");
+		printf(" 按户号显示小区电费记录信息\n");
+		printf(" 1为已扩容，0为未扩容\n");
 		printf(" 小区名：是否扩容：\n");
 		printf(" %-8s", rec[change].community);
 		printf("%-8d", rec[change].list);
@@ -149,7 +151,7 @@ void displayCommunityByID()
 					i++;
 				}
 			}
-			printf(" %-8d", rec[n].id);
+			printf(" %08d", rec[n].id);
 			printf("%-8s", rec[n].name);
 			printf("%-16lf", f);
 			printf("%-16lf", g);
@@ -176,7 +178,7 @@ void displayUnList()
 	if (findlist())
 	{
 		printf("已扩容小区名单：\n");
-		while (n <=count)
+		while (n <= count)
 		{
 			if (findCommunityname(rec, rec[n].community) && rec[n].list)
 			{
@@ -210,7 +212,7 @@ void displayList()
 	if (findunlist())
 	{
 		printf("未扩容小区名单：\n");
-		while (n <=count)
+		while (n <= count)
 		{
 			if (findCommunityname(rec, rec[n].community) && rec[n].list == 0)
 			{
@@ -240,9 +242,9 @@ void displayList()
 void displayneed()
 {
 	int i = 1;
-	double a = 0.0;/*统计小区月均超300度人数*/
-	double b = 0.0;/*统计小区人数*/
-	double x = 0.0;/*统计某户记录月份数*/
+	double a = 0.0;           /*统计小区月均超300度户数*/
+	double b = 0.0;           /*统计小区户数*/
+	double x = 0.0;           /*统计某户记录月份数*/
 	int n = findunlist();
 	int c = n;
 	if (n)
@@ -302,9 +304,9 @@ void displayneed()
 void displayunneeded()
 {
 	int i = 1;
-	double a = 0.0;/*统计小区月均超300度人数*/
-	double b = 0.0;/*统计小区人数*/
-	double x = 0.0;/*统计某户记录月份数*/
+	double a = 0.0;           /*统计小区月均超300度户数*/
+	double b = 0.0;           /*统计小区户数*/
+	double x = 0.0;           /*统计某户记录月份数*/
 	int n = findunlist();
 	int c = n;
 	if (n)
@@ -363,10 +365,24 @@ void displayunneeded()
 /*输入年月峰谷信息*/
 void ynfg()
 {
-	printf(" 年份：");
-	scanf_s("%d", &rec[count].year);
-	printf(" 月份：");
-	scanf_s("%d", &rec[count].month);
+	do
+	{
+		printf(" 年份：");
+		scanf_s("%d", &rec[count].year);
+		if (2000 > rec[count].year || rec[count].year > 2023)
+		{
+			printf(" 请输入2000至2023之间的年份\n");
+		}
+	} while (2000 > rec[count].year || rec[count].year > 2023);
+	do
+	{
+		printf(" 月份：");
+		scanf_s("%d", &rec[count].month);
+		if (1 > rec[count].month || rec[count].month > 12)
+		{
+			printf(" 请输入正确的月份\n");
+		}
+	} while (1 > rec[count].month || rec[count].month > 12);
 	printf(" 峰时电量：");
 	scanf_s("%lf", &rec[count].felectricity);
 	printf(" 谷时电量：");
@@ -388,12 +404,19 @@ void resetcount()
 /*添加住户选项*/
 void addRecord()
 {
-	printf("$ 添加住户信息 $\n");
+	printf(" 添加住户信息\n");
+	printf(" 正在录入住户信息……\n");
 	count++;
-	printf("$ 录入住户信息 $\n");
-	printf(" 户号：");
-	scanf_s("%d", &rec[count].id);                 /*先输入下一行的户号*/                     
-	change = findRecordByID(rec, rec[count].id);   /*寻找是否已有相同的户号*/
+	do
+	{
+		printf(" 户号：");
+		scanf_s("%d", &rec[count].id);              /*先输入下一行的户号*/
+		if (1 > rec[count].id || rec[count].id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > rec[count].id || rec[count].id > 99999999);
+	change = findRecordID(rec, rec[count].id);     /*寻找是否已有相同的户号*/
 	if (change)
 	{
 		printf(" 已有该用户信息：\n");             /*输出相同的信息*/
@@ -407,7 +430,7 @@ void addRecord()
 		ynfg();
 		rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 		rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[change].join);
-		change = 0;                               /*把change改为0*/
+		change = 0;                                /*把change改为0*/
 	}
 	else
 	{
@@ -418,24 +441,40 @@ void addRecord()
 		ynfg();
 		printf(" 人数：");
 		scanf_s("%d", &rec[count].number);
-		printf(" 是否参加峰谷计费：");
-		scanf_s("%d", &rec[count].join);
+		do
+		{
+			printf(" 是否参加峰谷计费：\n：");
+			printf(" 1为参加，0为不参加\n");
+			scanf_s("%d", &rec[count].join);
+			if (0 == rec[count].join || 1 == rec[count].join)
+			{
+				printf(" 请输入0或1\n");
+			}
+		} while (0 == rec[count].join || 1 == rec[count].join);
 		int n = findCommunityname(rec, rec[count].community);
 		if (n)
 		{
-			rec[count].list = rec[n].list;/*计算总电量、电费*/
+			rec[count].list = rec[n].list;
 			rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 			rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 		}
 		else
 		{
-			printf(" 是否扩容：");
-			scanf_s("%d", &rec[count].list);/*计算总电量、电费*/
+			do
+			{
+				printf(" 该小区是否扩容：\n：");
+				printf(" 1为已扩容，0为未扩容\n");
+				scanf_s("%d", &rec[count].list);
+				if (0 >rec[count].list || 1 < rec[count].list)
+				{
+					printf(" 请输入0或1\n");
+				}
+			} while (0 > rec[count].list || 1 < rec[count].list);
 			rec[count].electricity = rec[count].felectricity + rec[count].gelectricity;
 			rec[count].power_rate = rate(rec[count].felectricity, rec[count].gelectricity, rec[count].electricity, rec[count].number, rec[count].join);
 		}
 	}
-	printf("\n成功添加住户！\n");
+	printf("\n成功添加住户！\n\n");
 }
 
 /*删除住户选项*/
@@ -444,13 +483,34 @@ void removeRecord()
 	int id = 0;
 	int year = 0;
 	int month = 0;
-	printf("$ 输入户号和日期查找要删除的电费记录信息 $\n");
-	printf(" 输入户号：");
-	scanf_s("%d", &id);
-	printf(" 输入年份：");
-	scanf_s("%d", &year);
-	printf(" 输入月份：");
-	scanf_s("%d", &month);
+	printf(" 输入户号和日期查找要删除的电费记录信息 \n");
+	do
+	{
+		printf(" 输入户号：");
+		scanf_s("%d", &id);
+		if (1 > id || id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > id || id > 99999999);
+	do
+	{
+		printf(" 输入年份：");
+		scanf_s("%d", &year);
+		if (2000 > year || year > 2023)
+		{
+			printf(" 请输入2000至2023之间的年份\n");
+		}
+	} while (2000 > year || year > 2023);
+	do
+	{
+		printf(" 输入月份：");
+		scanf_s("%d", &month);
+		if (1 > month || month > 12)
+		{
+			printf(" 请输入正确的月份\n");
+		}
+	} while (1 > month || month > 12);
 	int n = findRecordByIDdate(rec, id, year, month);
 	if (n)
 	{
@@ -459,7 +519,7 @@ void removeRecord()
 			rec[n] = rec[++n];            /*用后一个数组覆盖前一个数组*/
 		}
 		count--;                          /*记录少了一行*/
-		printf("已删除该条信息\n");
+		printf("\n已删除该条信息\n\n");
 	}
 	else
 	{
@@ -470,25 +530,46 @@ void removeRecord()
 /*修改某月用电记录*/
 void modifyRecord()
 {
-
-	printf(" 输入户号：");
-	scanf_s("%d", &id);
+	do
+	{
+		printf(" 输入户号：");
+		scanf_s("%d", &id);
+		if (1 > id || id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > id || id > 99999999);
 	int year = 0;
 	int month = 0;
-	printf(" 输入年份：");
-	scanf_s("%d", &year);
-	printf(" 输入月份：");
-	scanf_s("%d", &month);
+	do
+	{
+		printf(" 输入年份：");
+		scanf_s("%d", &year);
+		if (2000 > year || year > 2023)
+		{
+			printf(" 请输入2000至2023之间的年份\n");
+		}
+	} while (2000 > year || year > 2023);
+	do
+	{
+		printf(" 输入月份：");
+		scanf_s("%d", &month);
+		if (1 > month || month > 12)
+		{
+			printf(" 请输入正确的月份\n");
+		}
+	} while (1 > month || month > 12);
 	change = findRecordByIDdate(rec, id, year, month);
 	if (change)
 	{
-		printf("$ 找到以下住户信息 $\n");
+		printf(" 找到以下住户信息 \n");
 		displaysameTitle();
 		displaysame(change);
 		displaydifferentTitle();
 		displaydifferent(change);
 		askfg();
 		change = 0;
+		printf(" 修改成功\n");
 	}
 	else
 	{
@@ -499,8 +580,15 @@ void modifyRecord()
 /*修改小区名*/
 void modifyname()
 {
-	printf(" 输入户号：");
-	scanf_s("%d", &id);
+	do
+	{
+		printf(" 输入户号：");
+		scanf_s("%d", &id);
+		if (1 > id || id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > id || id > 99999999);
 	change = findRecordByID(rec, id);
 	if (!change)
 	{
@@ -522,14 +610,22 @@ void modifyname()
 				i++;
 			}
 		}
+		printf(" 修改成功\n");
 	}
 }
 
 /*修改住户人数*/
 void modifynumber()
 {
-	printf(" 输入户号：");
-	scanf_s("%d", &id);
+	do
+	{
+		printf(" 输入户号：");
+		scanf_s("%d", &id);
+		if (1 > id || id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > id || id > 99999999);
 	change = findRecordByID(rec, id);
 	if (!change)
 	{
@@ -552,14 +648,22 @@ void modifynumber()
 				i++;
 			}
 		}
+		printf(" 修改成功\n");
 	}
 }
 
 /*修改是否参加峰谷计费*/
 void modifyjoin()
 {
-	printf(" 输入户号：");
-	scanf_s("%d", &id);
+	do
+	{
+		printf(" 输入户号：");
+		scanf_s("%d", &id);
+		if (1 > id || id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > id || id > 99999999);
 	change = findRecordByID(rec, id);
 	if (!change)
 	{
@@ -567,8 +671,16 @@ void modifyjoin()
 	}
 	else
 	{
-		printf(" 是否参加峰谷计费：");
-		scanf_s("%d", &rec[change].join);
+		do
+		{
+			printf(" 1为参加，0为不参加\n");
+			printf(" 是否参加峰谷计费：\n ");
+			scanf_s("%d", &rec[count].join);
+			if (0 > rec[count].join || 1 <  rec[count].join)
+			{
+				printf(" 请输入0或1\n");
+			}
+		} while (0 > rec[count].join || 1 < rec[count].join);
 		int i = change;
 		while (i <= count)
 		{
@@ -582,6 +694,7 @@ void modifyjoin()
 				i++;
 			}
 		}
+		printf(" 修改成功\n");
 	}
 }
 
@@ -596,11 +709,19 @@ void modifylist()
 	if (change)
 	{
 		printf(" 小区名：是否扩容：\n");
-		printf("%-8s", rec[change].community);
+		printf(" %-8s", rec[change].community);
 		printf("%-8d", rec[change].list);
 		printf("\n");
-		printf(" 是否扩容：");
-		scanf_s("%d", &rec[count].list);
+		do
+		{
+			printf(" 1为已扩容，0为未扩容\n");
+			printf(" 是否扩容：\n ");
+			scanf_s("%d", &rec[count].list);
+			if (0 > rec[count].list || 1 < rec[count].list)
+			{
+				printf(" 请输入0或1\n");
+			}
+		} while (0 >rec[count].list || 1 < rec[count].list);
 		while (n)
 		{
 			rec[n].list = rec[count].list;
@@ -613,6 +734,7 @@ void modifylist()
 			rec[n].count = 1;
 			n++;
 		}
+		printf(" 修改成功\n");
 	}
 	else
 	{
@@ -644,18 +766,26 @@ void changeg()
 void findRecord()
 {
 	double f = 0.0, g = 0.0, all = 0.0, rate = 0.0, x = 0.0;
-	printf("$ 按户号查找电费记录信息 $\n");
-	printf(" 输入户号：");
-	scanf_s("%d", &id);
+	printf(" 按户号查找电费记录信息\n");
+	do
+	{
+		printf(" 输入户号：");
+		scanf_s("%d", &id);
+		if (1 > id || id > 99999999)
+		{
+			printf(" 请输入小于八位的ID\n");
+		}
+	} while (1 > id || id > 99999999);
 	int n = findRecordByID(rec, id);
 	int i = n;
 	if (!i)
 	{
-		printf("住户信息中未找到该住户\n");
+		printf(" 住户信息中未找到该住户\n");
 	}
 	else
 	{
-		printf("$ 找到以下住户信息 $\n");
+		printf(" 1为参加、已扩容，0为未扩容、不参加\n");
+		printf(" 找到以下住户信息\n");
 		displaysameTitle();
 		displaysame(n);
 		displaydifferentTitle();
@@ -690,6 +820,21 @@ void findRecord()
 		printf("\n");
 	}
 	id = 0;
+}
+
+/*通过户号查找已有住户选项*/
+int findRecordID(Record* rec, int id)
+{
+	int i = 1;
+	while (i < count)
+	{
+		if (rec[i].id == id)
+		{
+			return i;
+		}
+		i++;
+	}
+	return 0;
 }
 
 /*通过户号查找住户选项*/

@@ -10,7 +10,7 @@ int readRecordFile(Record* rec)
 {
 	FILE* fp;
 	int i = 1;
-	fopen_s(&fp, "record.txt", "r");
+	fopen_s(&fp, "record.txt", "r");              /*以读方式打开指定文件*/
 	if (fp)
 	{
 		while (!feof(fp))
@@ -35,7 +35,7 @@ int readRecordFile(Record* rec)
 	}
 	else
 	{
-		printf("读文件失败！\n");
+		printf("读文件失败！\n");                /*若打开失败，输出提示信息*/
 		return 0;
 	}
 }
@@ -45,9 +45,9 @@ void saveFile(Record* rec, int count)
 {
 	FILE* fp;
 	fopen_s(&fp, "record.txt", "w");
-	if (fp)                                    /*以写方式打开指定文件*/
+	if (fp)                                     /*以写方式打开指定文件*/
 	{
-		for (int i = 1; i <=  count; ++i)       /*所有数据以此写入*/
+		for (int i = 1; i <=  count; ++i)       /*所有数据依次写入*/
 		{
 			fprintf(fp, "%d ", rec[i].id);
 			fprintf(fp, "%s ", rec[i].name);
@@ -69,7 +69,7 @@ void saveFile(Record* rec, int count)
 	else
 	{
 		printf("读文件失败！\n");              /*若打开失败，输出提示信息*/
-		exit(0);                               /*实际上不可能*/
+		exit(0);                               
 		fclose(fp);                            /*关闭文件*/
 	}
 }
